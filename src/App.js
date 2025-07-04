@@ -7,6 +7,8 @@ import NewFeed from './pages/NewFeed/NewFeedPage';
 import Event from './pages/Event/EventPage';
 import Shop from './pages/Shop/ShopPage';
 import Knowledge from './pages/Knowledge/KnowledgePage';
+import EventCreateForm from './pages/Event/EventCreateForm';
+import EventRegisterForm from './pages/Event/EventRegisterForm';
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="/event" element={<Event />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/knowledge" element={<Knowledge />} />
+        <Route path="/eventform" element={<EventCreateForm />} />
+        <Route path="/eventregister" element={<EventRegisterForm />} />
         {/* <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} /> */}
       </Routes>

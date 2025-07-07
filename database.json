@@ -1,1 +1,118 @@
-{}
+{
+    "users": [{
+            "username": "username",
+            "email": "user@gmail.com",
+            "password": "12345",
+            "phone": "0912345678",
+            "role": 1,
+            "gender": "male",
+            "dateOfBirth": "1985-03-12",
+            "location": "Hanoi, Vietnam"
+        },
+        {
+            "username": "FishingOwner",
+            "email": "abc@gmail.com",
+            "password": "12345",
+            "phone": "0987654321",
+            "role": 2,
+            "gender": "female",
+            "dateOfBirth": "1992-07-25",
+            "location": "Ho Chi Minh City, Vietnam"
+        },
+        {
+            "username": "admin",
+            "email": "admin@gmail.com",
+            "password": "12345",
+            "phone": "0909090909",
+            "role": 3,
+            "gender": "male",
+            "dateOfBirth": "1980-01-01",
+            "location": "Da Nang, Vietnam"
+        }
+    ],
+    "categories": [{
+            "id": 1,
+            "name": "Cần câu"
+        },
+        {
+            "id": 2,
+            "name": "Mồi câu"
+        },
+        {
+            "id": 3,
+            "name": "Phụ kiện"
+        }
+    ],
+    "shop": [{
+            "id": 1,
+            "name": "Cần câu Shimano FX",
+            "description": "Cần câu cá chất lượng cao, nhẹ và bền.",
+            "price": 1200000,
+            "image": "https://example.com/cancau.jpg",
+            "StockQuantity": 10,
+            "SoldQuantity": 5,
+            "CategoryId": 1,
+            "ownerId": 2
+        },
+        {
+            "id": 2,
+            "name": "Mồi tổng hợp nước ngọt",
+            "description": "Thu hút các loại cá như trắm, chép, rô phi.",
+            "price": 85000,
+            "image": "https://example.com/moi.jpg",
+            "StockQuantity": 50,
+            "SoldQuantity": 12,
+            "CategoryId": 2,
+            "ownerId": 2
+        }
+    ],
+    "shoppingCart": [{
+        "id": 1,
+        "userId": 1,
+        "productId": 2,
+        "quantity": 3
+    }],
+    "orderStatus": [
+        { "id": 1, "name": "Đang xử lý" },
+        { "id": 2, "name": "Đang giao hàng" },
+        { "id": 3, "name": "Hoàn thành" },
+        { "id": 4, "name": "Đã thanh toán" },
+        { "id": 5, "name": "Đã hủy" }
+    ],
+    "orders": [{
+        "id": 1,
+        "userId": 1,
+        "orderDate": "2025-07-05T10:00:00Z",
+        "statusId": 1,
+        "totalAmount": 255000
+    }],
+    "orderDetails": [{
+        "id": 1,
+        "orderId": 1,
+        "productId": 2,
+        "quantity": 3,
+        "unitPrice": 85000
+    }],
+
+    "knowledgeFish": [{
+            "id": 1,
+            "name": "Cá Trắm Đen",
+            "description": "Loài cá phổ biến ở sông hồ Việt Nam. Ăn thực vật.",
+            "image": "https://example.com/tramden.jpg",
+            "habitat": "Sông, hồ nước ngọt",
+            "tips": "Dùng mồi cám gạo, bánh mì ngâm nước.",
+            "averageSize": "40-70 cm",
+            "averageWeight": "3-5 kg"
+        },
+        {
+            "id": 2,
+            "name": "Cá Chép",
+            "description": "Thích nghi tốt, dễ câu và thường xuất hiện vào sáng sớm.",
+            "image": "https://example.com/cachep.jpg",
+            "habitat": "Ao, hồ, ruộng",
+            "tips": "Sử dụng mồi trứng kiến hoặc bột đậu xanh.",
+            "averageSize": "30-60 cm",
+            "averageWeight": "2-4 kg"
+        }
+    ]
+}

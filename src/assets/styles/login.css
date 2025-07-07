@@ -1,0 +1,39 @@
+.login-center > .login-row {
+  width: 700px;
+  max-width: 95vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.login-wrap {
+  background: #fff;
+  min-width: 320px;
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .login-center > .login-row {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.social-icon {
+  transition: background 0.2s, color 0.2s;
+  font-size: 1.2rem;
+}
+.social-icon:hover {
+  background: #e9ecef;
+  color: #0d6efd;
+  text-decoration: none;
+}
+.bg-primary {
+  background: linear-gradient(135deg, #0d6efd 60%, #3b82f6 100%) !important;
+}
+.login-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

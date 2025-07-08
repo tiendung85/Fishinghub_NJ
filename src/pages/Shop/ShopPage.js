@@ -1,32 +1,78 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col, Card, Button, Alert, Spinner, Stack } from "react-bootstrap";
-import { useAuth } from "../Auth/AuthContext"; 
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Button,
+  Alert,
+  Spinner,
+  Form,
+} from "react-bootstrap";
+import { useAuth } from "../Auth/AuthContext";
 
 export default function Shop() {
-  const { user, logout } = useAuth(); // ✅ useAuth from context
+  const { user } = useAuth();
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState("default");
+
   const navigate = useNavigate();
 
-  // ✅ Fetch product list once
   useEffect(() => {
     fetch("http://localhost:9999/shop")
       .then((res) => res.json())
-      .then((data) => setProducts(data))
+      .then((data) => {
+        setProducts(data);
+        setFilteredProducts(data);
+      })
       .catch((err) => console.error("Error fetching products:", err))
       .finally(() => setLoading(false));
   }, []);
 
-  // ✅ Handle add to cart (check login here only)
+  useEffect(() => {
+    let updated = [...products];
+
+    if (searchTerm) {
+      updated = updated.filter(p =>
+        p.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    switch (sortOption) {
+      case "price-asc":
+        updated.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        updated.sort((a, b) => b.price - a.price);
+        break;
+      case "name-asc":
+        updated.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      default:
+        break;
+    }
+
+    setFilteredProducts(updated);
+  }, [searchTerm, sortOption, products]);
+
+  const updateCart = (newCart) => {
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    window.dispatchEvent(new CustomEvent("cartUpdated"));
+  };
+
   const handleBuyClick = (product) => {
     if (!user) {
-      alert("Bạn cần đăng nhập để mua sản phẩm.");
       navigate("/login");
       return;
     }
 
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingCart = [...cart];
     const index = existingCart.findIndex((item) => item.id === product.id);
 
     if (index >= 0) {
@@ -35,67 +81,81 @@ export default function Shop() {
       existingCart.push({ ...product, quantity: 1 });
     }
 
-    localStorage.setItem("cart", JSON.stringify(existingCart));
-    alert("Đã thêm vào giỏ hàng!");
+    updateCart(existingCart);
   };
 
   return (
-    <Container className="mt-4">
-      <Stack direction="horizontal" gap={2} className="mb-3 justify-content-end">
-        {user ? (
-          <>
-            <span>Xin chào, {user.username}</span>
-            <Button variant="outline-danger" size="sm" onClick={logout}>
-              Đăng xuất
-            </Button>
-          </>
-        ) : (
-          <Button variant="outline-primary" size="sm" onClick={() => navigate("/login")}>
-            Đăng nhập
-          </Button>
-        )}
-      </Stack>
+    <Container className="pt-5 mt-5">
+      <h1 className="text-center fw-bold mb-4">📦 Sản phẩm</h1>
 
-      <h1 className="text-center mb-4">🛍️ Shop</h1>
-      <h4 className="mb-4 text-muted">Sản phẩm nổi bật</h4>
+      <Row className="mb-4 gx-3">
+        <Col xs={12} md={9} className="mb-2">
+          <Form.Control
+            type="text"
+            placeholder="🔍 Tìm kiếm sản phẩm..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="shadow-sm rounded-pill px-4 py-3 fs-5"
+            style={{ height: "56px" }}
+          />
+        </Col>
+        <Col xs={12} md={3} className="mb-2">
+         <Form.Select
+  value={sortOption}
+  onChange={(e) => setSortOption(e.target.value)}
+  className="rounded-pill py-3 px-3 fs-5 shadow-sm"
+ 
+>
+  <option value="default">Sản phẩm nổi bật</option>
+  <option value="price-asc">Giá tăng dần</option>
+  <option value="price-desc">Giá giảm dần</option>
+  <option value="name-asc">Tên A-Z</option>
+  
+</Form.Select>
+        </Col>
+      </Row>
 
       {loading ? (
         <div className="d-flex justify-content-center my-5">
           <Spinner animation="border" />
         </div>
-      ) : products.length === 0 ? (
-        <Alert variant="warning">Không có sản phẩm nào.</Alert>
+      ) : filteredProducts.length === 0 ? (
+        <Alert variant="warning">Không tìm thấy sản phẩm phù hợp.</Alert>
       ) : (
-        <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-          {products.map((product) => (
+        <Row xs={1} sm={2} md={3} lg={4} className="gy-4 gx-4">
+          {filteredProducts.map((product) => (
             <Col key={product.id}>
-              <Card className="h-100 shadow-sm">
+              <Card className="h-100 shadow-sm border-0 rounded-4 p-2 card-hover-effect">
                 <Card.Img
                   variant="top"
                   src={product.image}
                   alt={product.name}
+                  className="rounded-4"
                   style={{ height: "180px", objectFit: "cover" }}
                 />
-                <Card.Body>
-                  <Card.Title>{product.name}</Card.Title>
-                  <Card.Text style={{ fontSize: "0.9rem" }}>
+                <Card.Body className="d-flex flex-column">
+                  <Card.Title className="fw-semibold mb-2 text-dark">
+                    {product.name}
+                  </Card.Title>
+                  <Card.Text className="text-muted mb-3" style={{ fontSize: "0.9rem" }}>
                     {product.description}
                   </Card.Text>
-                  <Card.Text>
-                    <strong>Giá:</strong> {product.price.toLocaleString()} VND
-                    <br />
-                    <strong>Còn lại:</strong> {product.StockQuantity}
-                  </Card.Text>
+                  <div className="mt-auto">
+                    <p className="mb-1 fw-semibold text-primary">
+                      Giá: {product.price.toLocaleString()} VND
+                    </p>
+                    <p className="mb-3 text-secondary" style={{ fontSize: "0.85rem" }}>
+                      Còn lại: {product.StockQuantity}
+                    </p>
+                    <Button
+                      variant="primary"
+                      className="w-100 rounded-pill fw-semibold shadow-sm"
+                      onClick={() => handleBuyClick(product)}
+                    >
+                      🛒 Thêm vào giỏ
+                    </Button>
+                  </div>
                 </Card.Body>
-                <Card.Footer className="bg-white border-top-0">
-                  <Button
-                    variant="primary"
-                    className="w-100"
-                    onClick={() => handleBuyClick(product)}
-                  >
-                    Mua
-                  </Button>
-                </Card.Footer>
               </Card>
             </Col>
           ))}

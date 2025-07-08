@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../pages/Auth/AuthContext'; // ✅ adjust the path if needed
+import { useAuth } from '../pages/Auth/AuthContext'; // ✅ adjust path if needed
 import '../assets/styles/Header.css';
 
 function Header() {
@@ -9,18 +9,39 @@ function Header() {
   const navigate = useNavigate();
   const currentPath = location.pathname;
 
-  const { user, logout } = useAuth(); // ✅ central auth state
+  const { user, logout } = useAuth(); // ✅ auth state from context
+  const [cartCount, setCartCount] = useState(0); // ✅ cart count state
+
+  // 🔄 Load cart count from localStorage
+ useEffect(() => {
+  const updateCartCount = () => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = storedCart.reduce((sum, item) => sum + item.quantity, 0);
+    setCartCount(total);
+  };
+
+  // Run once on mount
+  updateCartCount();
+
+  // ✅ Listen to both localStorage & custom event
+  window.addEventListener("cartUpdated", updateCartCount);
+  window.addEventListener("storage", updateCartCount);
+
+  return () => {
+    window.removeEventListener("cartUpdated", updateCartCount);
+    window.removeEventListener("storage", updateCartCount);
+  };
+}, []);
 
   const handleLogout = () => {
-    logout(); // ✅ clear user context
+    logout(); // ✅ clear user
     navigate("/login");
   };
 
   const getLinkClass = (path) =>
-    `fw-semibold mx-2 pb-1 ${
-      currentPath === path
-        ? "text-primary border-bottom border-2 border-primary"
-        : "text-secondary"
+    `fw-semibold mx-2 pb-1 ${currentPath === path
+      ? "text-primary border-bottom border-2 border-primary"
+      : "text-secondary"
     }`;
 
   return (
@@ -52,12 +73,26 @@ function Header() {
                 <span className="me-3 fw-semibold text-secondary">
                   Xin chào, {user.username || user.name || "người dùng"}
                 </span>
+
+                {/* ✅ Giỏ hàng with item count */}
+
+
                 <Button
                   variant="outline-danger"
                   className="rounded-pill px-4 fw-semibold shadow-sm"
                   onClick={handleLogout}
                 >
                   Đăng xuất
+                </Button>
+
+                <Button
+                  as={Link}
+                  to="/cart"
+                  variant="outline-success"
+                  className="rounded-pill ms-2 px-4 fw-semibold shadow-sm" // 👈 added ms-2 here
+                  style={{ borderWidth: 2 }}
+                >
+                  🛒 Giỏ hàng ({cartCount})
                 </Button>
               </>
             ) : (

@@ -8,6 +8,7 @@ import Event from './pages/Event/EventPage';
 import Shop from './pages/Shop/ShopPage';
 import Knowledge from './pages/Knowledge/KnowledgePage';
 import Login from './pages/Auth/Login';
+import Cart from './pages/Shop/Cart/cart';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/knowledge" element={<Knowledge />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
+
       </Routes>
       <Footer />
       </div>

@@ -1,118 +1,692 @@
 {
-    "users": [{
-            "username": "username",
-            "email": "user@gmail.com",
-            "password": "12345",
-            "phone": "0912345678",
-            "role": 1,
-            "gender": "male",
-            "dateOfBirth": "1985-03-12",
-            "location": "Hanoi, Vietnam"
-        },
-        {
-            "username": "FishingOwner",
-            "email": "abc@gmail.com",
-            "password": "12345",
-            "phone": "0987654321",
-            "role": 2,
-            "gender": "female",
-            "dateOfBirth": "1992-07-25",
-            "location": "Ho Chi Minh City, Vietnam"
-        },
-        {
-            "username": "admin",
-            "email": "admin@gmail.com",
-            "password": "12345",
-            "phone": "0909090909",
-            "role": 3,
-            "gender": "male",
-            "dateOfBirth": "1980-01-01",
-            "location": "Da Nang, Vietnam"
-        }
-    ],
-    "categories": [{
-            "id": 1,
-            "name": "Cần câu"
-        },
-        {
-            "id": 2,
-            "name": "Mồi câu"
-        },
-        {
-            "id": 3,
-            "name": "Phụ kiện"
-        }
-    ],
-    "shop": [{
-            "id": 1,
-            "name": "Cần câu Shimano FX",
-            "description": "Cần câu cá chất lượng cao, nhẹ và bền.",
-            "price": 1200000,
-            "image": "https://example.com/cancau.jpg",
-            "StockQuantity": 10,
-            "SoldQuantity": 5,
-            "CategoryId": 1,
-            "ownerId": 2
-        },
-        {
-            "id": 2,
-            "name": "Mồi tổng hợp nước ngọt",
-            "description": "Thu hút các loại cá như trắm, chép, rô phi.",
-            "price": 85000,
-            "image": "https://example.com/moi.jpg",
-            "StockQuantity": 50,
-            "SoldQuantity": 12,
-            "CategoryId": 2,
-            "ownerId": 2
-        }
-    ],
-    "shoppingCart": [{
-        "id": 1,
-        "userId": 1,
-        "productId": 2,
-        "quantity": 3
-    }],
-    "orderStatus": [
-        { "id": 1, "name": "Đang xử lý" },
-        { "id": 2, "name": "Đang giao hàng" },
-        { "id": 3, "name": "Hoàn thành" },
-        { "id": 4, "name": "Đã thanh toán" },
-        { "id": 5, "name": "Đã hủy" }
-    ],
-    "orders": [{
-        "id": 1,
-        "userId": 1,
-        "orderDate": "2025-07-05T10:00:00Z",
-        "statusId": 1,
-        "totalAmount": 255000
-    }],
-    "orderDetails": [{
-        "id": 1,
-        "orderId": 1,
-        "productId": 2,
-        "quantity": 3,
-        "unitPrice": 85000
-    }],
-
-    "knowledgeFish": [{
-            "id": 1,
-            "name": "Cá Trắm Đen",
-            "description": "Loài cá phổ biến ở sông hồ Việt Nam. Ăn thực vật.",
-            "image": "https://example.com/tramden.jpg",
-            "habitat": "Sông, hồ nước ngọt",
-            "tips": "Dùng mồi cám gạo, bánh mì ngâm nước.",
-            "averageSize": "40-70 cm",
-            "averageWeight": "3-5 kg"
-        },
-        {
-            "id": 2,
-            "name": "Cá Chép",
-            "description": "Thích nghi tốt, dễ câu và thường xuất hiện vào sáng sớm.",
-            "image": "https://example.com/cachep.jpg",
-            "habitat": "Ao, hồ, ruộng",
-            "tips": "Sử dụng mồi trứng kiến hoặc bột đậu xanh.",
-            "averageSize": "30-60 cm",
-            "averageWeight": "2-4 kg"
-        }
-    ]
+  "users": [
+    {
+      "username": "username",
+      "email": "user@gmail.com",
+      "password": "12345",
+      "phone": "0912345678",
+      "role": 1,
+      "gender": "male",
+      "dateOfBirth": "1985-03-12",
+      "location": "Hanoi, Vietnam"
+    },
+    {
+      "username": "FishingOwner",
+      "email": "abc@gmail.com",
+      "password": "12345",
+      "phone": "0987654321",
+      "role": 2,
+      "gender": "female",
+      "dateOfBirth": "1992-07-25",
+      "location": "Ho Chi Minh City, Vietnam"
+    },
+    {
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "12345",
+      "phone": "0909090909",
+      "role": 3,
+      "gender": "male",
+      "dateOfBirth": "1980-01-01",
+      "location": "Da Nang, Vietnam"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Cần câu"
+    },
+    {
+      "id": 2,
+      "name": "Mồi câu"
+    },
+    {
+      "id": 3,
+      "name": "Phụ kiện"
+    }
+  ],
+  "shop": [
+    {
+      "id": 1,
+      "name": "Cần câu Shimano FX",
+      "description": "Cần câu cá chất lượng cao, nhẹ và bền.",
+      "price": 1200000,
+      "image": "https://example.com/cancau.jpg",
+      "StockQuantity": 10,
+      "SoldQuantity": 5,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 2,
+      "name": "Mồi tổng hợp nước ngọt",
+      "description": "Thu hút các loại cá như trắm, chép, rô phi.",
+      "price": 85000,
+      "image": "https://example.com/moi.jpg",
+      "StockQuantity": 50,
+      "SoldQuantity": 12,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 3,
+      "name": "Cần câu #1",
+      "description": "Gỡ cá nhanh chóng và an toàn.",
+      "price": 1204820,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 14,
+      "SoldQuantity": 5,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 4,
+      "name": "Cần câu #2",
+      "description": "Giữ cá tươi lâu sau khi bắt.",
+      "price": 386187,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 139,
+      "SoldQuantity": 35,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 5,
+      "name": "Kềm gỡ lưỡi #3",
+      "description": "Sắc bén, không gỉ, thích hợp cho mọi loại cá.",
+      "price": 365040,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 122,
+      "SoldQuantity": 53,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 6,
+      "name": "Balo cần câu #4",
+      "description": "Thiết kế chống gió, dễ quan sát.",
+      "price": 84183,
+      "image": "https://example.com/item2.jpg",
+      "StockQuantity": 62,
+      "SoldQuantity": 22,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 7,
+      "name": "Lưỡi câu #5",
+      "description": "Tiện lợi, chứa được nhiều dụng cụ câu cá.",
+      "price": 75585,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 192,
+      "SoldQuantity": 73,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 8,
+      "name": "Lưới vớt cá #6",
+      "description": "Sắc bén, không gỉ, thích hợp cho mọi loại cá.",
+      "price": 1243299,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 8,
+      "SoldQuantity": 4,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 9,
+      "name": "Lưới vớt cá #7",
+      "description": "Chất lượng cao, bền và nhẹ.",
+      "price": 453459,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 88,
+      "SoldQuantity": 26,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 10,
+      "name": "Cần câu #8",
+      "description": "Tiện lợi, chứa được nhiều dụng cụ câu cá.",
+      "price": 377595,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 64,
+      "SoldQuantity": 23,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 11,
+      "name": "Cần câu #9",
+      "description": "Chống nước, dễ vệ sinh.",
+      "price": 1120051,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 172,
+      "SoldQuantity": 84,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 12,
+      "name": "Cần câu #10",
+      "description": "Thiết kế chống gió, dễ quan sát.",
+      "price": 1433125,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 67,
+      "SoldQuantity": 7,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 13,
+      "name": "Lưỡi câu #11",
+      "description": "Chống nước, dễ vệ sinh.",
+      "price": 800616,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 22,
+      "SoldQuantity": 11,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 14,
+      "name": "Túi đựng đồ câu #12",
+      "description": "Giữ cá tươi lâu sau khi bắt.",
+      "price": 1450674,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 107,
+      "SoldQuantity": 29,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 15,
+      "name": "Lưới vớt cá #13",
+      "description": "Bảo vệ tay khỏi trầy xước khi câu cá.",
+      "price": 839503,
+      "image": "https://example.com/item2.jpg",
+      "StockQuantity": 132,
+      "SoldQuantity": 36,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 16,
+      "name": "Cần câu #14",
+      "description": "Tiện lợi, chứa được nhiều dụng cụ câu cá.",
+      "price": 639852,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 130,
+      "SoldQuantity": 50,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 17,
+      "name": "Lưỡi câu #15",
+      "description": "Che nắng tốt, thoáng mát.",
+      "price": 444156,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 106,
+      "SoldQuantity": 53,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 18,
+      "name": "Nón che nắng #16",
+      "description": "Gỡ cá nhanh chóng và an toàn.",
+      "price": 749021,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 125,
+      "SoldQuantity": 35,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 19,
+      "name": "Áo khoác câu cá #17",
+      "description": "Dẻo dai, chịu lực tốt.",
+      "price": 705390,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 74,
+      "SoldQuantity": 34,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 20,
+      "name": "Kềm gỡ lưỡi #18",
+      "description": "Dễ dàng vớt cá mà không làm tổn thương.",
+      "price": 576571,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 169,
+      "SoldQuantity": 41,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 21,
+      "name": "Áo khoác câu cá #19",
+      "description": "Giữ cá tươi lâu sau khi bắt.",
+      "price": 397803,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 39,
+      "SoldQuantity": 7,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 22,
+      "name": "Găng tay câu cá #20",
+      "description": "Sắc bén, không gỉ, thích hợp cho mọi loại cá.",
+      "price": 1334708,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 150,
+      "SoldQuantity": 25,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 23,
+      "name": "Túi đựng đồ câu #21",
+      "description": "Bảo vệ tay khỏi trầy xước khi câu cá.",
+      "price": 514880,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 164,
+      "SoldQuantity": 18,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 24,
+      "name": "Balo cần câu #22",
+      "description": "Chất lượng cao, bền và nhẹ.",
+      "price": 561062,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 25,
+      "SoldQuantity": 9,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 25,
+      "name": "Lưỡi câu #23",
+      "description": "Hương thơm tự nhiên, thu hút cá hiệu quả.",
+      "price": 1334891,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 145,
+      "SoldQuantity": 25,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 26,
+      "name": "Lưới vớt cá #24",
+      "description": "Che nắng tốt, thoáng mát.",
+      "price": 973467,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 199,
+      "SoldQuantity": 20,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 27,
+      "name": "Dây câu #25",
+      "description": "Thiết kế chống gió, dễ quan sát.",
+      "price": 852620,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 104,
+      "SoldQuantity": 26,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 28,
+      "name": "Áo khoác câu cá #26",
+      "description": "Chất lượng cao, bền và nhẹ.",
+      "price": 186327,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 194,
+      "SoldQuantity": 55,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 29,
+      "name": "Phao câu #27",
+      "description": "Tiện lợi, chứa được nhiều dụng cụ câu cá.",
+      "price": 269678,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 141,
+      "SoldQuantity": 26,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 30,
+      "name": "Nón che nắng #28",
+      "description": "Che nắng tốt, thoáng mát.",
+      "price": 430250,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 192,
+      "SoldQuantity": 26,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 31,
+      "name": "Lưới vớt cá #29",
+      "description": "Thiết kế chống gió, dễ quan sát.",
+      "price": 307740,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 50,
+      "SoldQuantity": 21,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 32,
+      "name": "Lưỡi câu #30",
+      "description": "Dẻo dai, chịu lực tốt.",
+      "price": 1314459,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 123,
+      "SoldQuantity": 5,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 33,
+      "name": "Thùng đựng cá #31",
+      "description": "Hương thơm tự nhiên, thu hút cá hiệu quả.",
+      "price": 1286616,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 131,
+      "SoldQuantity": 25,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 34,
+      "name": "Cần câu #32",
+      "description": "Dễ dàng vớt cá mà không làm tổn thương.",
+      "price": 404682,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 130,
+      "SoldQuantity": 20,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 35,
+      "name": "Dây câu #33",
+      "description": "Chống gió và chống thấm, phù hợp với mọi thời tiết.",
+      "price": 1315836,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 183,
+      "SoldQuantity": 34,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 36,
+      "name": "Thùng đựng cá #34",
+      "description": "Sắc bén, không gỉ, thích hợp cho mọi loại cá.",
+      "price": 935693,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 5,
+      "SoldQuantity": 1,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 37,
+      "name": "Dây câu #35",
+      "description": "Gỡ cá nhanh chóng và an toàn.",
+      "price": 1193303,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 102,
+      "SoldQuantity": 5,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 38,
+      "name": "Thùng đựng cá #36",
+      "description": "Sắc bén, không gỉ, thích hợp cho mọi loại cá.",
+      "price": 865384,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 5,
+      "SoldQuantity": 2,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 39,
+      "name": "Kềm gỡ lưỡi #37",
+      "description": "Dễ dàng vớt cá mà không làm tổn thương.",
+      "price": 698472,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 60,
+      "SoldQuantity": 24,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 40,
+      "name": "Mồi câu #38",
+      "description": "Hương thơm tự nhiên, thu hút cá hiệu quả.",
+      "price": 1285363,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 104,
+      "SoldQuantity": 25,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 41,
+      "name": "Balo cần câu #39",
+      "description": "Chống gió và chống thấm, phù hợp với mọi thời tiết.",
+      "price": 186630,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 137,
+      "SoldQuantity": 21,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 42,
+      "name": "Mồi câu #40",
+      "description": "Thiết kế chống gió, dễ quan sát.",
+      "price": 110155,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 35,
+      "SoldQuantity": 10,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 43,
+      "name": "Áo khoác câu cá #41",
+      "description": "Chất lượng cao, bền và nhẹ.",
+      "price": 1108805,
+      "image": "https://example.com/item2.jpg",
+      "StockQuantity": 16,
+      "SoldQuantity": 3,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 44,
+      "name": "Phao câu #42",
+      "description": "Tiện lợi, chứa được nhiều dụng cụ câu cá.",
+      "price": 1395273,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 26,
+      "SoldQuantity": 0,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 45,
+      "name": "Túi đựng đồ câu #43",
+      "description": "Hương thơm tự nhiên, thu hút cá hiệu quả.",
+      "price": 852222,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 40,
+      "SoldQuantity": 3,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 46,
+      "name": "Lưỡi câu #44",
+      "description": "Dẻo dai, chịu lực tốt.",
+      "price": 563036,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 5,
+      "SoldQuantity": 0,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 47,
+      "name": "Mồi câu #45",
+      "description": "Giữ cá tươi lâu sau khi bắt.",
+      "price": 1470595,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 74,
+      "SoldQuantity": 12,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 48,
+      "name": "Áo khoác câu cá #46",
+      "description": "Tiện lợi, chứa được nhiều dụng cụ câu cá.",
+      "price": 1179835,
+      "image": "https://example.com/item1.jpg",
+      "StockQuantity": 86,
+      "SoldQuantity": 42,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 49,
+      "name": "Phao câu #47",
+      "description": "Hương thơm tự nhiên, thu hút cá hiệu quả.",
+      "price": 1288541,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 103,
+      "SoldQuantity": 46,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": 50,
+      "name": "Mồi câu #48",
+      "description": "Chất lượng cao, bền và nhẹ.",
+      "price": 886021,
+      "image": "https://example.com/item5.jpg",
+      "StockQuantity": 100,
+      "SoldQuantity": 45,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 51,
+      "name": "Lưỡi câu #49",
+      "description": "Bảo vệ tay khỏi trầy xước khi câu cá.",
+      "price": 569732,
+      "image": "https://example.com/item3.jpg",
+      "StockQuantity": 119,
+      "SoldQuantity": 8,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": 52,
+      "name": "Găng tay câu cá #50",
+      "description": "Tiện lợi, chứa được nhiều dụng cụ câu cá.",
+      "price": 411022,
+      "image": "https://example.com/item4.jpg",
+      "StockQuantity": 5,
+      "SoldQuantity": 2,
+      "CategoryId": 1,
+      "ownerId": 2
+    }
+  ],
+  "shoppingCart": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 2,
+      "quantity": 3
+    }
+  ],
+  "orderStatus": [
+    {
+      "id": 1,
+      "name": "Đang xử lý"
+    },
+    {
+      "id": 2,
+      "name": "Đang giao hàng"
+    },
+    {
+      "id": 3,
+      "name": "Hoàn thành"
+    },
+    {
+      "id": 4,
+      "name": "Đã thanh toán"
+    },
+    {
+      "id": 5,
+      "name": "Đã hủy"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 1,
+      "orderDate": "2025-07-05T10:00:00Z",
+      "statusId": 1,
+      "totalAmount": 255000
+    }
+  ],
+  "orderDetails": [
+    {
+      "id": 1,
+      "orderId": 1,
+      "productId": 2,
+      "quantity": 3,
+      "unitPrice": 85000
+    }
+  ],
+  "knowledgeFish": [
+    {
+      "id": 1,
+      "name": "Cá Trắm Đen",
+      "description": "Loài cá phổ biến ở sông hồ Việt Nam. Ăn thực vật.",
+      "image": "https://example.com/tramden.jpg",
+      "habitat": "Sông, hồ nước ngọt",
+      "tips": "Dùng mồi cám gạo, bánh mì ngâm nước.",
+      "averageSize": "40-70 cm",
+      "averageWeight": "3-5 kg"
+    },
+    {
+      "id": 2,
+      "name": "Cá Chép",
+      "description": "Thích nghi tốt, dễ câu và thường xuất hiện vào sáng sớm.",
+      "image": "https://example.com/cachep.jpg",
+      "habitat": "Ao, hồ, ruộng",
+      "tips": "Sử dụng mồi trứng kiến hoặc bột đậu xanh.",
+      "averageSize": "30-60 cm",
+      "averageWeight": "2-4 kg"
+    }
+  ]
 }

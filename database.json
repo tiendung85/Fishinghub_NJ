@@ -1,1 +1,445 @@
-{}
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "username",
+      "email": "user@gmail.com",
+      "password": "12345",
+      "phone": "0912345678",
+      "role": 1,
+      "gender": "male",
+      "dateOfBirth": "1985-03-12",
+      "location": "Hanoi, Vietnam"
+    },
+    {
+      "id": 2,
+      "username": "FishingOwner",
+      "email": "abc@gmail.com",
+      "password": "12345",
+      "phone": "0987654321",
+      "role": 2,
+      "gender": "female",
+      "dateOfBirth": "1992-07-25",
+      "location": "Ho Chi Minh City, Vietnam"
+    },
+    {
+      "id": 3,
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "12345",
+      "phone": "0909090909",
+      "role": 3,
+      "gender": "male",
+      "dateOfBirth": "1980-01-01",
+      "location": "Da Nang, Vietnam"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Cần câu"
+    },
+    {
+      "id": 2,
+      "name": "Mồi câu"
+    },
+    {
+      "id": 3,
+      "name": "Phụ kiện"
+    }
+  ],
+  "shop": [
+    {
+      "id": 1,
+      "name": "Cần câu Shimano FX",
+      "description": "Cần câu cá chất lượng cao, nhẹ và bền.",
+      "price": 1200000,
+      "image": "https://example.com/cancau.jpg",
+      "StockQuantity": 10,
+      "SoldQuantity": 5,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 2,
+      "name": "Mồi tổng hợp nước ngọt",
+      "description": "Thu hút các loại cá như trắm, chép, rô phi.",
+      "price": 85000,
+      "image": "https://example.com/moi.jpg",
+      "StockQuantity": 50,
+      "SoldQuantity": 12,
+      "CategoryId": 2,
+      "ownerId": 2
+    }
+  ],
+  "shoppingCart": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 2,
+      "quantity": 3
+    }
+  ],
+  "orderStatus": [
+    {
+      "id": 1,
+      "name": "Đang xử lý"
+    },
+    {
+      "id": 2,
+      "name": "Đang giao hàng"
+    },
+    {
+      "id": 3,
+      "name": "Hoàn thành"
+    },
+    {
+      "id": 4,
+      "name": "Đã thanh toán"
+    },
+    {
+      "id": 5,
+      "name": "Đã hủy"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 1,
+      "orderDate": "2025-07-05T10:00:00Z",
+      "statusId": 1,
+      "totalAmount": 255000
+    }
+  ],
+  "orderDetails": [
+    {
+      "id": 1,
+      "orderId": 1,
+      "productId": 2,
+      "quantity": 3,
+      "unitPrice": 85000
+    }
+  ],
+  "knowledgeFish": [
+    {
+      "id": 1,
+      "name": "Cá Trắm Đen",
+      "description": "Loài cá phổ biến ở sông hồ Việt Nam. Ăn thực vật.",
+      "image": "https://example.com/tramden.jpg",
+      "habitat": "Sông, hồ nước ngọt",
+      "tips": "Dùng mồi cám gạo, bánh mì ngâm nước.",
+      "averageSize": "40-70 cm",
+      "averageWeight": "3-5 kg"
+    },
+    {
+      "id": 2,
+      "name": "Cá Chép",
+      "description": "Thích nghi tốt, dễ câu và thường xuất hiện vào sáng sớm.",
+      "image": "https://example.com/cachep.jpg",
+      "habitat": "Ao, hồ, ruộng",
+      "tips": "Sử dụng mồi trứng kiến hoặc bột đậu xanh.",
+      "averageSize": "30-60 cm",
+      "averageWeight": "2-4 kg"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+      "title": "Giải đấu câu cá Hồ Tây 2025",
+      "status": "Sắp diễn ra",
+      "startDate": "2025-05-17T08:00",
+      "endDate": "2025-05-17T12:00",
+      "location": "Hồ Tây, Hà Nội",
+      "region": "north",
+      "type": "tournament",
+      "participants": 120,
+      "maxParticipants": 150,
+      "hasPrize": true,
+      "approved": "approved",
+      "prizeDetail": "Có nhiều phần quà giá trị",
+      "description": "Tham gia giải đấu câu cá lớn nhất miền Bắc với tổng giải thưởng lên đến 50 triệu đồng và nhiều phần quà hấp dẫn."
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
+      "title": "Workshop kỹ thuật câu cá biển",
+      "status": "Sắp diễn ra",
+      "startDate": "2025-06-10T09:00",
+      "endDate": "2025-06-10T13:00",
+      "location": "Bãi Cháy, Quảng Ninh",
+      "region": "north",
+      "type": "workshop",
+      "participants": 60,
+      "maxParticipants": 80,
+      "hasPrize": false,
+      "approved": "approved",
+      "description": "Học hỏi kỹ thuật câu cá biển cùng chuyên gia, thực hành thực tế trên tàu và nhận quà tặng hấp dẫn."
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80",
+      "title": "Ngày hội câu cá gia đình",
+      "status": "Đang diễn ra",
+      "startDate": "2025-04-20T07:30",
+      "endDate": "2025-04-20T11:30",
+      "location": "Hồ Đồng Mô, Sơn Tây",
+      "region": "north",
+      "type": "festival",
+      "participants": 90,
+      "maxParticipants": 120,
+      "hasPrize": true,
+      "approved": "approved",
+      "prizeDetail": "Quà tặng hấp dẫn cho mọi gia đình",
+      "description": "Sự kiện dành cho các gia đình yêu thích câu cá, nhiều hoạt động vui chơi và giải thưởng hấp dẫn."
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+      "title": "Giải đấu câu cá miền Trung",
+      "status": "Sắp diễn ra",
+      "startDate": "2025-07-05T08:00",
+      "endDate": "2025-07-05T12:00",
+      "location": "Sông Hàn, Đà Nẵng",
+      "region": "central",
+      "type": "tournament",
+      "participants": 80,
+      "maxParticipants": 100,
+      "hasPrize": true,
+      "approved": "approved",
+      "prizeDetail": "Tổng giải thưởng lên đến 50 triệu",
+      "description": "Thử sức cùng các cần thủ miền Trung, giải thưởng lớn và cơ hội giao lưu kết bạn."
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
+      "title": "Hội thảo bảo vệ môi trường nước",
+      "status": "Sắp diễn ra",
+      "startDate": "2025-08-12T13:30",
+      "endDate": "2025-08-12T17:30",
+      "location": "Trung tâm Hội nghị, Huế",
+      "region": "central",
+      "type": "workshop",
+      "participants": 39,
+      "maxParticipants": 60,
+      "hasPrize": false,
+      "approved": "approved",
+      "description": "Cùng tìm hiểu về bảo vệ môi trường nước và thực hành các kỹ năng câu cá thân thiện với thiên nhiên."
+    },
+    {
+      "id": 6,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80",
+      "title": "Ngày hội câu cá miền Nam",
+      "status": "Đang diễn ra",
+      "startDate": "2025-04-15T09:00",
+      "endDate": "2025-04-15T13:00",
+      "location": "Hồ Dầu Tiếng, Tây Ninh",
+      "region": "south",
+      "type": "festival",
+      "participants": 110,
+      "maxParticipants": 150,
+      "hasPrize": true,
+      "approved": "approved",
+      "prizeDetail": "Nhiều quà tặng cho người tham gia",
+      "description": "Ngày hội lớn nhất miền Nam dành cho mọi lứa tuổi, nhiều phần thưởng và hoạt động ngoài trời."
+    },
+    {
+      "id": 7,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80",
+      "title": "Giải đấu câu cá trẻ em",
+      "status": "Sắp diễn ra",
+      "startDate": "2025-09-01T08:00",
+      "endDate": "2025-09-01T12:00",
+      "location": "Công viên Gia Định, TP.HCM",
+      "region": "south",
+      "type": "tournament",
+      "participants": 50,
+      "maxParticipants": 70,
+      "hasPrize": true,
+      "approved": "approved",
+      "prizeDetail": "Quà tặng đặc biệt cho các bé",
+      "description": "Sân chơi bổ ích cho các bạn nhỏ yêu thích câu cá, có giải thưởng và quà tặng cho mọi người tham gia."
+    },
+    {
+      "id": 8,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+      "title": "Workshop kỹ năng câu cá nước ngọt",
+      "status": "Đã kết thúc",
+      "startDate": "2025-03-10T09:00",
+      "endDate": "2025-03-10T13:00",
+      "location": "Hồ Trị An, Đồng Nai",
+      "region": "south",
+      "type": "workshop",
+      "participants": 70,
+      "maxParticipants": 80,
+      "hasPrize": false,
+      "approved": "approved",
+      "description": "Nâng cao kỹ năng câu cá nước ngọt cùng chuyên gia, thực hành thực tế và nhận chứng nhận."
+    },
+    {
+      "id": 9,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
+      "title": "Giải đấu câu cá giao lưu",
+      "status": "Đã kết thúc",
+      "startDate": "2025-02-20T08:00",
+      "endDate": "2025-02-20T12:00",
+      "location": "Hồ Núi Cốc, Thái Nguyên",
+      "region": "north",
+      "type": "tournament",
+      "participants": 100,
+      "maxParticipants": 120,
+      "hasPrize": true,
+      "approved": "approved",
+      "prizeDetail": "Giao lưu nhận quà kỷ niệm",
+      "description": "Giải đấu giao lưu giữa các CLB câu cá toàn quốc, nhiều phần thưởng hấp dẫn."
+    },
+    {
+      "id": 10,
+      "userId": 2,
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
+      "title": "Ngày hội câu cá mùa hè",
+      "status": "Sắp diễn ra",
+      "startDate": "2025-07-20T07:00",
+      "endDate": "2025-07-20T11:00",
+      "location": "Hồ Suối Vàng, Đà Lạt",
+      "region": "central",
+      "type": "festival",
+      "participants": 60,
+      "maxParticipants": 100,
+      "hasPrize": true,
+      "approved": "approved",
+      "prizeDetail": "Nhiều quà tặng mùa hè hấp dẫn",
+      "description": "Ngày hội mùa hè với nhiều hoạt động ngoài trời, câu cá, picnic và giải thưởng hấp dẫn."
+    },
+    {
+      "title": "myprojec",
+      "type": "tournament",
+      "location": "hanoi",
+      "region": "north",
+      "startDate": "2025-07-09T22:13",
+      "endDate": "2025-07-24T22:13",
+      "description": "11111",
+      "maxParticipants": 123,
+      "hasPrize": false,
+      "approved": "pending",
+      "prizeDetail": "",
+      "image": "data:image/jpeg;base64,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",
+      "status": "Sắp diễn ra",
+      "participants": 0,
+      "userId": 2,
+      "id": 12
+    },
+    {
+      "title": "myprojec",
+      "type": "workshop",
+      "location": "hanoi",
+      "region": "north",
+      "startDate": "2025-07-08T22:14",
+      "endDate": "2025-07-31T22:14",
+      "description": "eeee",
+      "maxParticipants": 123,
+      "hasPrize": false,
+      "approved": "pending",
+      "prizeDetail": "",
+      "image": "http://localhost:3000/eventform",
+      "status": "Sắp diễn ra",
+      "participants": 0,
+      "userId": 1,
+      "id": 13
+    },
+    {
+      "title": "myprojec",
+      "type": "tournament",
+      "location": "hanoi",
+      "region": "central",
+      "startDate": "2025-07-08T22:42",
+      "endDate": "2025-07-16T22:41",
+      "description": "sa",
+      "maxParticipants": 123,
+      "hasPrize": false,
+      "prizeDetail": "",
+      "approved": "pending",
+      "image": "http://localhost:3000/eventform",
+      "status": "Sắp diễn ra",
+      "participants": 0,
+      "userId": 2,
+      "id": 14
+    }
+  ],
+  "registrations": [
+    {
+      "eventId": 5,
+      "name": "ád",
+      "phone": "dá",
+      "email": "dungcnhe181056@fpt.edu.vn",
+      "age": "21",
+      "gender": "Nam",
+      "registeredAt": "2025-07-07T15:18:58.977Z",
+      "id": 1
+    },
+    {
+      "eventId": 7,
+      "userId": 2,
+      "name": "Dung Chu Ngoc",
+      "phone": "0335011798",
+      "email": "dungcnhe181056@fpt.edu.vn",
+      "age": "21",
+      "gender": "Nam",
+      "registeredAt": "2025-07-08T08:57:52.860Z",
+      "id": 3
+    },
+    {
+      "eventId": 7,
+      "userId": 2,
+      "name": "Dung Chu Ngoc",
+      "phone": "0335011798",
+      "email": "dungcnhe181056@fpt.edu.vn",
+      "age": "21",
+      "gender": "Nam",
+      "registeredAt": "2025-07-08T08:57:58.346Z",
+      "id": 4
+    },
+    {
+      "eventId": 6,
+      "userId": 2,
+      "name": "Dung Chu Ngoc",
+      "phone": "0334624364",
+      "email": "chungocdung2@gmail.com",
+      "age": "21",
+      "gender": "Nam",
+      "registeredAt": "2025-07-08T08:58:52.666Z",
+      "id": 6
+    },
+    {
+      "eventId": 7,
+      "userId": 2,
+      "name": "Dung Chu Ngoc",
+      "phone": "0334624364",
+      "email": "chungocdung2@gmail.com",
+      "age": "21",
+      "gender": "Nam",
+      "registeredAt": "2025-07-08T09:06:21.922Z",
+      "id": 7
+    },
+    {
+      "eventId": 7,
+      "userId": 1,
+      "name": "Dung Chu Ngoc",
+      "phone": "0334624364",
+      "email": "chungocdung2@gmail.com",
+      "age": "21",
+      "gender": "Nam",
+      "registeredAt": "2025-07-08T09:45:37.744Z",
+      "id": 8
+    }
+  ]
+}

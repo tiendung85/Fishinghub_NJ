@@ -1,61 +1,141 @@
-import { Container, Row, Breadcrumb, Col } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useAuth } from "../Auth/AuthContext";
 
-const events = [
-    {
-        image: "https://readdy.ai/api/search-image?query=fishing%2520tournament%2520event%2520at%2520a%2520beautiful%2520lake%252C%2520many%2520participants%2520with%2520fishing%2520rods%252C%2520tents%2520and%2520banners%2520set%2520up%252C%2520sunny%2520day%252C%2520vibrant%2520atmosphere%252C%2520high%2520quality%2520photography&width=400&height=240&seq=event1&orientation=landscape",
-        status: "Sắp diễn ra",
-        date: "17/05/2025",
-        title: "Giải đấu câu cá Hồ Tây 2025",
-        description: "Tham gia giải đấu câu cá lớn nhất miền Bắc với tổng giải thưởng lên đến 50 triệu đồng và nhiều phần quà hấp dẫn.",
-        location: "Hồ Tây, Hà Nội",
-        participants: "120/150 người"
-    },
-    {
-        image: "https://readdy.ai/api/search-image?query=fishing%2520tournament%2520event%2520at%2520a%2520beautiful%2520lake%252C%2520many%2520participants%2520with%2520fishing%2520rods%252C%2520tents%2520and%2520banners%2520set%2520up%252C%2520sunny%2520day%252C%2520vibrant%2520atmosphere%252C%2520high%2520quality%2520photography&width=400&height=240&seq=event1&orientation=landscape",
-        status: "Sắp diễn ra",
-        date: "17/05/2025",
-        title: "Giải đấu câu cá Hồ Tây 2025",
-        description: "Tham gia giải đấu câu cá lớn nhất miền Bắc với tổng giải thưởng lên đến 50 triệu đồng và nhiều phần quà hấp dẫn.",
-        location: "Hồ Tây, Hà Nội",
-        participants: "120/150 người"
-    },
-    {
-        image: "https://readdy.ai/api/search-image?query=fishing%2520tournament%2520event%2520at%2520a%2520beautiful%2520lake%252C%2520many%2520participants%2520with%2520fishing%2520rods%252C%2520tents%2520and%2520banners%2520set%2520up%252C%2520sunny%2520day%252C%2520vibrant%2520atmosphere%252C%2520high%2520quality%2520photography&width=400&height=240&seq=event1&orientation=landscape",
-        status: "Sắp diễn ra",
-        date: "17/05/2025",
-        title: "Giải đấu câu cá Hồ Tây 2025",
-        description: "Tham gia giải đấu câu cá lớn nhất miền Bắc với tổng giải thưởng lên đến 50 triệu đồng và nhiều phần quà hấp dẫn.",
-        location: "Hồ Tây, Hà Nội",
-        participants: "120/150 người"
-    },
-    // ...thêm các sự kiện khác...
-];
-// const events = [
-//     {
-//         image: "...",
-//         status: "Sắp diễn ra",         // Trạng thái
-//         date: "17/05/2025",            // Ngày diễn ra
-//         title: "Giải đấu câu cá Hồ Tây 2025",
-//         description: "...",
-//         location: "Hồ Tây, Hà Nội",
-//         region: "north",               // "north" | "central" | "south"
-//         participants: 120,             // Số người đã đăng ký
-//         maxParticipants: 150,          // Số người tối đa
-//         type: "tournament",            // "tournament" | "workshop" | "festival" | "other"
-//         fee: 0,                        // 0: miễn phí, >0: có phí
-//         hasPrize: true,                // Có giải thưởng không
-//         forBeginner: true,             // Phù hợp cho người mới không
-//         forFamily: false               // Phù hợp cho gia đình không
-//     },
-//     // ...các sự kiện khác
-// ];
 export default function NewFeed() {
+    const [events, setEvents] = useState([]);
+    const [search, setSearch] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [eventsPerPage, setEventsPerPage] = useState(9);
+    const [filter, setFilter] = useState({
+        status: "",
+        region: "",
+        type: ""
+    });
+    const [sort, setSort] = useState("newest");
+    const [fromDate, setFromDate] = useState("");
+    const [toDate, setToDate] = useState("");
+    const [onlyAvailable, setOnlyAvailable] = useState(false);
+    const [onlyPrize, setOnlyPrize] = useState(false);
+    const [registeredEventIds, setRegisteredEventIds] = useState([]);
+
+    const { user } = useAuth();
+
+    useEffect(() => {
+        fetch("http://localhost:9999/events")
+            .then(res => res.json())
+            .then(data => setEvents(data))
+            .catch(() => setEvents([]));
+    }, []);
+
+    useEffect(() => {
+        if (user) {
+            fetch(`http://localhost:9999/registrations?userId=${user.id}`)
+                .then(res => res.json())
+                .then(data => setRegisteredEventIds(data.map(r => r.eventId)));
+        } else {
+            setRegisteredEventIds([]);
+        }
+    }, [user]);
+
+    let filteredEvents = events
+        .filter(event => event.approved === "approved")
+        .filter(event =>
+            (event.title && event.title.toLowerCase().includes(search.toLowerCase())) ||
+            (event.description && event.description.toLowerCase().includes(search.toLowerCase()))
+        );
+
+    if (filter.status) filteredEvents = filteredEvents.filter(e => e.status === filter.status);
+    if (filter.region) filteredEvents = filteredEvents.filter(e => e.region === filter.region);
+    if (filter.type) filteredEvents = filteredEvents.filter(e => e.type === filter.type);
+
+    if (fromDate) {
+        filteredEvents = filteredEvents.filter(e => new Date(e.startDate) >= new Date(fromDate));
+    }
+    if (toDate) {
+        filteredEvents = filteredEvents.filter(e => new Date(e.endDate) <= new Date(toDate));
+    }
+    if (onlyAvailable) {
+        filteredEvents = filteredEvents.filter(
+            e => e.participants < e.maxParticipants && e.status === "Sắp diễn ra"
+        );
+    }
+    if (onlyPrize) {
+        filteredEvents = filteredEvents.filter(e => e.hasPrize === true);
+    }
+
+    filteredEvents = [...filteredEvents].sort((a, b) => {
+        if (sort === "newest") return new Date(b.startDate) - new Date(a.startDate);
+        if (sort === "upcoming") {
+            const statusOrder = {
+                "Sắp diễn ra": 0,
+                "Đang diễn ra": 1,
+                "Đã kết thúc": 2
+            };
+            const sa = statusOrder[a.status] ?? 99;
+            const sb = statusOrder[b.status] ?? 99;
+            if (sa !== sb) return sa - sb;
+            return new Date(a.startDate) - new Date(b.startDate);
+        }
+        if (sort === "most-popular") {
+            const statusOrder = {
+                "Sắp diễn ra": 0,
+                "Đang diễn ra": 1,
+                "Đã kết thúc": 2
+            };
+            const sa = statusOrder[a.status] ?? 99;
+            const sb = statusOrder[b.status] ?? 99;
+            if (sa !== sb) return sa - sb;
+            return Number(b.participants) - Number(a.participants);
+        }
+        return 0;
+    });
+
+    const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
+    const startIdx = (currentPage - 1) * eventsPerPage;
+    const endIdx = startIdx + eventsPerPage;
+    const paginatedEvents = filteredEvents.slice(startIdx, endIdx);
+
+    const handleEventsPerPageChange = (e) => {
+        setEventsPerPage(Number(e.target.value));
+        setCurrentPage(1);
+    };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        setFilter(prev => ({ ...prev, [name]: value }));
+        setCurrentPage(1);
+    };
+
+    const handleSortChange = (e) => {
+        setSort(e.target.value);
+    };
+
+    const handleResetFilter = () => {
+        setFilter({
+            status: "",
+            region: "",
+            type: "",
+        });
+        setFromDate("");
+        setToDate("");
+        setSearch("");
+        setOnlyAvailable(false);
+        setOnlyPrize(false);
+        setCurrentPage(1);
+    };
+
     return (
         <Container fluid className="main-content pb-5">
             <Container>
                 <Row>
                     <Col>
-                        <nav aria-label="breadcrumb" >
+                        <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item">
                                     <a href="#" className="text-decoration-none">Trang chủ</a>
@@ -69,28 +149,38 @@ export default function NewFeed() {
                 </Row>
             </Container>
             <Container>
-                <Row className=" mb-4 ">
+                <Row className="mb-4">
                     <main>
                         <div>
                             <Row className="align-items-center mb-4">
-                                <Col xs={12} md={8}>
+                                <Col xs={12} md={6}>
                                     <h1 className="mb-2">Sự kiện nổi bật</h1>
                                     <p className="mb-0">
                                         Tất cả các sự kiện câu cá đang diễn ra và sắp tới
                                     </p>
                                 </Col>
-                                <Col xs={12} md={4}>
+                                <Col xs={12} md={6}>
                                     <div className="d-flex justify-content-end align-items-center gap-2">
                                         <input
                                             type="text"
                                             placeholder="Tìm kiếm sự kiện..."
                                             className="form-control"
                                             style={{ maxWidth: 180 }}
+                                            value={search}
+                                            onChange={e => setSearch(e.target.value)}
                                         />
-                                        <a href="/eventform" className="btn btn-primary d-flex align-items-center gap-1">
-                                            <i className="ri-add-line"></i>
-                                            <span>Tạo sự kiện</span>
-                                        </a>
+                                        {user && user.role === 2 && (
+                                            <>
+                                                <Link to="/eventform" className="btn btn-primary d-flex align-items-center gap-1">
+                                                    <i className="ri-add-line"></i>
+                                                    <span>Tạo sự kiện</span>
+                                                </Link>
+                                                <Link to="/dashboardowner" className="btn btn-secondary d-flex align-items-center gap-1">
+                                                    <i className="bi bi-speedometer2"></i>
+                                                    <span>Dashboard</span>
+                                                </Link>
+                                            </>
+                                        )}
                                     </div>
                                 </Col>
                             </Row>
@@ -102,7 +192,7 @@ export default function NewFeed() {
                                             <h6>Bộ lọc</h6>
                                         </Col>
                                         <Col xs={12} md={8} className="text-end">
-                                            <a href="#">
+                                            <a href="#" onClick={handleResetFilter}>
                                                 <i className="ri-refresh-line"></i>
                                                 <span>Đặt lại bộ lọc</span>
                                             </a>
@@ -111,16 +201,16 @@ export default function NewFeed() {
                                     <Row className="g-3 mb-3">
                                         <Col md={3} xs={12}>
                                             <label htmlFor="statusSelect" className="form-label">Trạng thái</label>
-                                            <select id="statusSelect" className="form-select">
+                                            <select name="status" className="form-select" value={filter.status} onChange={handleFilterChange}>
                                                 <option value="">Tất cả</option>
-                                                <option value="upcoming">Sắp diễn ra</option>
-                                                <option value="ongoing">Đang diễn ra</option>
-                                                <option value="completed">Đã kết thúc</option>
+                                                <option value="Sắp diễn ra">Sắp diễn ra</option>
+                                                <option value="Đang diễn ra">Đang diễn ra</option>
+                                                <option value="Đã kết thúc">Đã kết thúc</option>
                                             </select>
                                         </Col>
                                         <Col md={3} xs={12}>
                                             <label htmlFor="regionSelect" className="form-label">Khu vực</label>
-                                            <select id="regionSelect" className="form-select">
+                                            <select name="region" className="form-select" value={filter.region} onChange={handleFilterChange}>
                                                 <option value="">Tất cả</option>
                                                 <option value="north">Miền Bắc</option>
                                                 <option value="central">Miền Trung</option>
@@ -129,66 +219,110 @@ export default function NewFeed() {
                                         </Col>
                                         <Col md={3} xs={12}>
                                             <label htmlFor="fromDate" className="form-label">Từ ngày</label>
-                                            <input id="fromDate" type="date" className="form-control" />
+                                            <input
+                                                id="fromDate"
+                                                type="date"
+                                                className="form-control"
+                                                value={fromDate}
+                                                onChange={e => setFromDate(e.target.value)}
+                                            />
                                         </Col>
                                         <Col md={3} xs={12}>
                                             <label htmlFor="toDate" className="form-label">Đến ngày</label>
-                                            <input id="toDate" type="date" className="form-control" />
+                                            <input
+                                                id="toDate"
+                                                type="date"
+                                                className="form-control"
+                                                value={toDate}
+                                                onChange={e => setToDate(e.target.value)}
+                                            />
                                         </Col>
                                     </Row>
                                     <Row className="g-3 mb-3">
                                         <Col md={3} xs={12}>
                                             <label className="form-label mb-2">Loại sự kiện</label>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="type-tournament" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="radio"
+                                                    name="type"
+                                                    id="type-all"
+                                                    value=""
+                                                    checked={filter.type === ""}
+                                                    onChange={handleFilterChange}
+                                                />
+                                                <label className="form-check-label" htmlFor="type-all">Tất cả</label>
+                                            </div>
+                                            <div className="form-check">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="radio"
+                                                    name="type"
+                                                    id="type-tournament"
+                                                    value="tournament"
+                                                    checked={filter.type === "tournament"}
+                                                    onChange={handleFilterChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="type-tournament">Giải đấu</label>
                                             </div>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="type-workshop" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="radio"
+                                                    name="type"
+                                                    id="type-workshop"
+                                                    value="workshop"
+                                                    checked={filter.type === "workshop"}
+                                                    onChange={handleFilterChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="type-workshop">Workshop</label>
                                             </div>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="type-festival" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="radio"
+                                                    name="type"
+                                                    id="type-festival"
+                                                    value="festival"
+                                                    checked={filter.type === "festival"}
+                                                    onChange={handleFilterChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="type-festival">Ngày hội</label>
                                             </div>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="type-other" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="radio"
+                                                    name="type"
+                                                    id="type-other"
+                                                    value="other"
+                                                    checked={filter.type === "other"}
+                                                    onChange={handleFilterChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="type-other">Khác</label>
-                                            </div>
-                                        </Col>
-                                        <Col md={3} xs={12}>
-                                            <label className="form-label mb-2">Phí tham gia</label>
-                                            <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="fee-free" />
-                                                <label className="form-check-label" htmlFor="fee-free">Miễn phí</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="fee-paid" />
-                                                <label className="form-check-label" htmlFor="fee-paid">Có phí</label>
                                             </div>
                                         </Col>
                                         <Col md={3} xs={12}>
                                             <label className="form-label mb-2">Tùy chọn khác</label>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="option-available" defaultChecked />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="option-available"
+                                                    checked={onlyAvailable}
+                                                    onChange={e => setOnlyAvailable(e.target.checked)}
+                                                />
                                                 <label className="form-check-label" htmlFor="option-available">Còn chỗ đăng ký</label>
                                             </div>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="option-prize" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="option-prize"
+                                                    checked={onlyPrize}
+                                                    onChange={e => setOnlyPrize(e.target.checked)}
+                                                />
                                                 <label className="form-check-label" htmlFor="option-prize">Có giải thưởng</label>
-                                            </div>
-
-                                        </Col>
-
-                                        <Col md={3} xs={12}>
-                                            <label ></label>
-                                            <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="option-available" />
-                                                <label className="form-check-label" htmlFor="option-beginner">Phù hợp cho người mới</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="option-family" />
-                                                <label className="form-check-label" htmlFor="option-family">Phù hợp cho gia đình</label>
                                             </div>
                                         </Col>
                                     </Row>
@@ -201,38 +335,69 @@ export default function NewFeed() {
                                 </Col>
                                 <Col xs={12} md={4}>
                                     <div className="position-relative">
-                                        <select className="form-select w-auto">
+                                        <select className="form-select w-auto" value={sort} onChange={handleSortChange}>
                                             <option value="newest">Mới nhất</option>
-                                            <option value="popular">Phổ biến nhất</option>
                                             <option value="upcoming">Sắp diễn ra</option>
-                                            <option value="price-low">Phí tham gia: Thấp đến cao</option>
-                                            <option value="price-high">Phí tham gia: Cao đến thấp</option>
+                                            <option value="most-popular">Nổi bật nhất</option>
                                         </select>
                                         <i className="ri-arrow-down-s-line position-absolute end-0 top-50 translate-middle-y me-3"></i>
                                     </div>
                                 </Col>
                             </Row>
 
-
-
                             <Row className="g-4 mb-4">
-                                {/* Giả sử bạn có mảng events */}
-                                {events.map((event, idx) => (
-                                    <Col md={4} sm={6} xs={12} key={idx}>
+                                {paginatedEvents.map((event, idx) => (
+                                    <Col md={4} sm={6} xs={12} key={event.id || idx}>
                                         <div className="card h-100 shadow-sm rounded-4">
-                                            <img src={event.image} className="card-img-top" alt={event.title} />
+                                            <img
+                                                src={event.image}
+                                                className="card-img-top"
+                                                alt={event.title}
+                                                style={{
+                                                    height: 200,
+                                                    objectFit: "cover",
+                                                    borderRadius: "16px 16px 0 0"
+                                                }}
+                                            />
                                             <div className="card-body">
                                                 <div className="d-flex justify-content-between mb-2">
                                                     <span className="badge bg-info">{event.status}</span>
-                                                    <span>{event.date}</span>
+                                                    <span>
+                                                        {new Date(event.startDate).toLocaleDateString("vi-VN")} - {new Date(event.endDate).toLocaleDateString("vi-VN")}
+                                                    </span>
                                                 </div>
                                                 <h5 className="card-title">{event.title}</h5>
-                                                <p className="card-text">{event.description}</p>
+                                                <div
+                                                    className="text-muted"
+                                                    style={{
+                                                        fontSize: 15,
+                                                        display: "-webkit-box",
+                                                        WebkitLineClamp: 3,
+                                                        WebkitBoxOrient: "vertical",
+                                                        overflow: "hidden"
+                                                    }}
+                                                >
+                                                    {event.description}
+                                                </div>
                                                 <div className="d-flex justify-content-between small text-muted mb-2">
                                                     <span><i className="ri-map-pin-line"></i> {event.location}</span>
-                                                    <span><i className="ri-user-line"></i> {event.participants}</span>
+                                                    <span><i className="ri-user-line"></i> {event.participants}/{event.maxParticipants}</span>
                                                 </div>
-                                                <a href="/eventregister" className="btn btn-primary w-100">Đăng ký tham gia</a>
+                                                {user && registeredEventIds.includes(event.id) ? (
+                                                    <Link
+                                                        to={`/eventregister/${event.id}`}
+                                                        className="btn btn-danger w-100"
+                                                    >
+                                                        Hủy đăng ký
+                                                    </Link>
+                                                ) : (
+                                                    <Link
+                                                        to={`/eventregister/${event.id}`}
+                                                        className="btn btn-primary w-100"
+                                                    >
+                                                        Đăng ký tham gia
+                                                    </Link>
+                                                )}
                                             </div>
                                         </div>
                                     </Col>
@@ -241,18 +406,20 @@ export default function NewFeed() {
 
                             <Row className="align-items-center justify-content-between mt-4">
                                 <Col md="auto" className="mb-2 mb-md-0">
-                                    <span>Hiển thị 1-9 của 42 sự kiện</span>
+                                    <span>
+                                        Hiển thị {startIdx + 1}-{Math.min(endIdx, filteredEvents.length)} của {filteredEvents.length} sự kiện
+                                    </span>
                                 </Col>
                                 <Col md="auto" className="mb-2 mb-md-0">
                                     <nav>
                                         <ul className="pagination mb-0">
-
-                                            <li className="page-item"><button className="page-link">1</button></li>
-                                            <li className="page-item"><button className="page-link">2</button></li>
-                                            <li className="page-item"><button className="page-link">3</button></li>
-                                            <li className="page-item"><button className="page-link">4</button></li>
-                                            <li className="page-item"><button className="page-link">5</button></li>
-
+                                            {Array.from({ length: totalPages }, (_, i) => (
+                                                <li key={i + 1} className={`page-item${currentPage === i + 1 ? " active" : ""}`}>
+                                                    <button className="page-link" onClick={() => handlePageChange(i + 1)}>
+                                                        {i + 1}
+                                                    </button>
+                                                </li>
+                                            ))}
                                         </ul>
                                     </nav>
                                 </Col>
@@ -260,13 +427,12 @@ export default function NewFeed() {
                                     <div className="d-flex align-items-center">
                                         <span className="me-2">Hiển thị:</span>
                                         <div className="position-relative">
-                                            <select className="form-select w-auto">
+                                            <select className="form-select w-auto" value={eventsPerPage} onChange={handleEventsPerPageChange}>
                                                 <option value="9">9</option>
                                                 <option value="18">18</option>
                                                 <option value="27">27</option>
                                                 <option value="36">36</option>
                                             </select>
-                                            <i className="ri-arrow-down-s-line position-absolute end-0 top-50 translate-middle-y me-3"></i>
                                         </div>
                                     </div>
                                 </Col>

@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {
     Nav, Container, Row, Col, Card, Table, Button, Form, Badge, InputGroup, Modal
 } from "react-bootstrap";
+import { useAuth } from "../Auth/AuthContext"; // Thêm dòng này nếu chưa có
 
 export default function EventManager() {
     const [events, setEvents] = useState([]);
@@ -14,14 +15,15 @@ export default function EventManager() {
         location: "",
         fromDate: "",
         toDate: "",
-        approved: "" // thêm dòng này
+        approved: ""
     });
     const [showDetail, setShowDetail] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const [eventsPerPage, setEventsPerPage] = useState(10); // hoặc 9, 20 tùy ý
+    const [eventsPerPage, setEventsPerPage] = useState(10);
 
     const navigate = useNavigate();
+    const { user } = useAuth(); // Lấy user hiện tại
 
     useEffect(() => {
         fetch("http://localhost:9999/events")
@@ -29,8 +31,14 @@ export default function EventManager() {
             .then(data => setEvents(data));
     }, []);
 
+    // Lọc sự kiện theo userId nếu là chủ hồ câu
+    let ownerEvents = events;
+    if (user && user.role === 2) {
+        ownerEvents = events.filter(event => String(event.userId) === String(user.id));
+    }
+
     // Filter logic
-    let filteredEvents = events.filter(event => {
+    let filteredEvents = ownerEvents.filter(event => {
         const matchesSearch = event.title.toLowerCase().includes(search.toLowerCase());
         const matchesStatus = filter.status ? event.status === filter.status : true;
         const matchesType = filter.type ? event.type === filter.type : true;
@@ -39,7 +47,7 @@ export default function EventManager() {
             : true;
         const matchesFromDate = filter.fromDate ? new Date(event.startDate) >= new Date(filter.fromDate) : true;
         const matchesToDate = filter.toDate ? new Date(event.endDate) <= new Date(filter.toDate) : true;
-        const matchesApproved = filter.approved ? event.approved === filter.approved : true; // thêm dòng này
+        const matchesApproved = filter.approved ? event.approved === filter.approved : true;
         return matchesSearch && matchesStatus && matchesType && matchesLocation && matchesFromDate && matchesToDate && matchesApproved;
     });
 

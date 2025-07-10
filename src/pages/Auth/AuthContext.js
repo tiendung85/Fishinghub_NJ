@@ -1,12 +1,10 @@
-import React, { createContext, useState, useContext } from "react";
-
-
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(() => {
-        // Lấy user từ localStorage khi khởi tạo
+        // Initialize from localStorage if available
         const storedUser = localStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : null;
     });
@@ -18,17 +16,19 @@ export function AuthProvider({ children }) {
         const foundUser = data.find(
             (u) => u.email === email && u.password === password
         );
+
         if (foundUser) {
             setUser(foundUser);
-            localStorage.setItem("user", JSON.stringify(foundUser)); // Lưu vào localStorage
-            return true;
+            localStorage.setItem("user", JSON.stringify(foundUser));
+            return foundUser;
         }
-        return false;
+
+        return null;
     };
 
     const logout = () => {
         setUser(null);
-        localStorage.removeItem("user"); // Xóa khỏi localStorage
+        localStorage.removeItem("user");
     };
 
     return (

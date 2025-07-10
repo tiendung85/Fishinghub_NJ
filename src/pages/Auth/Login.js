@@ -12,15 +12,22 @@ function Login() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const success = await login(email, password);
-        if (success) {
-            navigate("/");
+        const user = await login(email, password);
+        console.log("User after login:", user); // Thêm dòng này để kiểm tra
+        if (user) {
+            if (user.role === 3) {
+                navigate("/admin");
+            } else {
+                navigate("/");
+            }
         } else {
             setError("Sai email hoặc mật khẩu");
         }
     };
+
 
     return (
         <Container className="login-center" >

@@ -14,30 +14,47 @@ import EventCreateNotification from './pages/Event/EventCreateNotification';
 import Login from './pages/Auth/Login';
 import DashboardOwner from './dashboards/FishingOwner/DashboardOwner';
 import EventEditForm from './pages/Event/EventEditForm';
-import EventParticipants from './pages/Event/EventParticipants'; // Import component
+import EventParticipants from './pages/Event/EventParticipants';
+import DashboardAdmin from './dashboards/Admin/DashboardAdmin';
+import { AuthProvider } from './pages/Auth/AuthContext';
+import EventsList from './dashboards/Admin/Events';
+
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/newfeed" element={<NewFeed />} />
-        <Route path="/event" element={<Event />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/knowledge" element={<Knowledge />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/eventform" element={<EventCreateForm />} />
-        <Route path="/eventregister/:id" element={<EventRegisterForm />} />
-        <Route path="/eventsmanager" element={<EventManager />} />
-        <Route path="/eventcreatenotification" element={<EventCreateNotification />} />
-        <Route path="/dashboardowner" element={<DashboardOwner />} />
-        <Route path="/eventedit/:id" element={<EventEditForm />} />
-        <Route path="/events/:id/participants" element={<EventParticipants />} /> {/* New route */}
-
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/admin" element={<DashboardAdmin />}>
+            <Route path="managerevent" element={<EventsList />} />
+          </Route>
+          <Route
+            path="*"
+            element={
+              <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+                <Header />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/newfeed" element={<NewFeed />} />
+                  <Route path="/event" element={<Event />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/knowledge" element={<Knowledge />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/eventform" element={<EventCreateForm />} />
+                  <Route path="/eventregister/:id" element={<EventRegisterForm />} />
+                  <Route path="/eventsmanager" element={<EventManager />} />
+                  <Route path="/eventcreatenotification" element={<EventCreateNotification />} />
+                  <Route path="/dashboardowner" element={<DashboardOwner />} />
+                  <Route path="/eventedit/:id" element={<EventEditForm />} />
+                  <Route path="/events/:id/participants" element={<EventParticipants />} />
+                </Routes>
+                <Footer />
+              </div>
+            }
+          />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter >
   );
 }
 

@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Auth/AuthContext";
 
-export default function NewFeed() {
+export default function EventPage() {
     const [events, setEvents] = useState([]);
     const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);

@@ -1,118 +1,707 @@
 {
-    "users": [{
-            "username": "username",
-            "email": "user@gmail.com",
-            "password": "12345",
-            "phone": "0912345678",
-            "role": 1,
-            "gender": "male",
-            "dateOfBirth": "1985-03-12",
-            "location": "Hanoi, Vietnam"
-        },
-        {
-            "username": "FishingOwner",
-            "email": "abc@gmail.com",
-            "password": "12345",
-            "phone": "0987654321",
-            "role": 2,
-            "gender": "female",
-            "dateOfBirth": "1992-07-25",
-            "location": "Ho Chi Minh City, Vietnam"
-        },
-        {
-            "username": "admin",
-            "email": "admin@gmail.com",
-            "password": "12345",
-            "phone": "0909090909",
-            "role": 3,
-            "gender": "male",
-            "dateOfBirth": "1980-01-01",
-            "location": "Da Nang, Vietnam"
-        }
-    ],
-    "categories": [{
-            "id": 1,
-            "name": "Cần câu"
-        },
-        {
-            "id": 2,
-            "name": "Mồi câu"
-        },
-        {
-            "id": 3,
-            "name": "Phụ kiện"
-        }
-    ],
-    "shop": [{
-            "id": 1,
-            "name": "Cần câu Shimano FX",
-            "description": "Cần câu cá chất lượng cao, nhẹ và bền.",
-            "price": 1200000,
-            "image": "https://example.com/cancau.jpg",
-            "StockQuantity": 10,
-            "SoldQuantity": 5,
-            "CategoryId": 1,
-            "ownerId": 2
-        },
-        {
-            "id": 2,
-            "name": "Mồi tổng hợp nước ngọt",
-            "description": "Thu hút các loại cá như trắm, chép, rô phi.",
-            "price": 85000,
-            "image": "https://example.com/moi.jpg",
-            "StockQuantity": 50,
-            "SoldQuantity": 12,
-            "CategoryId": 2,
-            "ownerId": 2
-        }
-    ],
-    "shoppingCart": [{
-        "id": 1,
-        "userId": 1,
-        "productId": 2,
-        "quantity": 3
-    }],
-    "orderStatus": [
-        { "id": 1, "name": "Đang xử lý" },
-        { "id": 2, "name": "Đang giao hàng" },
-        { "id": 3, "name": "Hoàn thành" },
-        { "id": 4, "name": "Đã thanh toán" },
-        { "id": 5, "name": "Đã hủy" }
-    ],
-    "orders": [{
-        "id": 1,
-        "userId": 1,
-        "orderDate": "2025-07-05T10:00:00Z",
-        "statusId": 1,
-        "totalAmount": 255000
-    }],
-    "orderDetails": [{
-        "id": 1,
-        "orderId": 1,
-        "productId": 2,
-        "quantity": 3,
-        "unitPrice": 85000
-    }],
-
-    "knowledgeFish": [{
-            "id": 1,
-            "name": "Cá Trắm Đen",
-            "description": "Loài cá phổ biến ở sông hồ Việt Nam. Ăn thực vật.",
-            "image": "https://example.com/tramden.jpg",
-            "habitat": "Sông, hồ nước ngọt",
-            "tips": "Dùng mồi cám gạo, bánh mì ngâm nước.",
-            "averageSize": "40-70 cm",
-            "averageWeight": "3-5 kg"
-        },
-        {
-            "id": 2,
-            "name": "Cá Chép",
-            "description": "Thích nghi tốt, dễ câu và thường xuất hiện vào sáng sớm.",
-            "image": "https://example.com/cachep.jpg",
-            "habitat": "Ao, hồ, ruộng",
-            "tips": "Sử dụng mồi trứng kiến hoặc bột đậu xanh.",
-            "averageSize": "30-60 cm",
-            "averageWeight": "2-4 kg"
-        }
-    ]
+  "users": [
+    {
+      "username": "username",
+      "email": "user@gmail.com",
+      "password": "12345",
+      "phone": "0912345678",
+      "role": 1,
+      "gender": "male",
+      "dateOfBirth": "1985-03-12",
+      "location": "Hanoi, Vietnam"
+    },
+    {
+      "username": "FishingOwner",
+      "email": "abc@gmail.com",
+      "password": "12345",
+      "phone": "0987654321",
+      "role": 2,
+      "gender": "female",
+      "dateOfBirth": "1992-07-25",
+      "location": "Ho Chi Minh City, Vietnam"
+    },
+    {
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "12345",
+      "phone": "0909090909",
+      "role": 3,
+      "gender": "male",
+      "dateOfBirth": "1980-01-01",
+      "location": "Da Nang, Vietnam"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Cần câu"
+    },
+    {
+      "id": 2,
+      "name": "Mồi câu"
+    },
+    {
+      "id": 3,
+      "name": "Phụ kiện"
+    }
+  ],
+  "shop": [
+    {
+      "id": 1,
+      "name": "Cần câu Shimano FX",
+      "description": "Cần câu cá chất lượng cao, nhẹ và bền.",
+      "price": 1200000,
+      "image": "https://example.com/cancau.jpg",
+      "StockQuantity": 10,
+      "SoldQuantity": 5,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 2,
+      "name": "Mồi tổng hợp nước ngọt",
+      "description": "Thu hút các loại cá như trắm, chép, rô phi.",
+      "price": 85000,
+      "image": "https://example.com/moi.jpg",
+      "StockQuantity": 50,
+      "SoldQuantity": 12,
+      "CategoryId": 2,
+      "ownerId": 2
+    }
+  ],
+  "shoppingCart": [],
+  "orderStatus": [
+    {
+      "id": 1,
+      "name": "Đang xử lý"
+    },
+    {
+      "id": 2,
+      "name": "Đang giao hàng"
+    },
+    {
+      "id": 3,
+      "name": "Hoàn thành"
+    },
+    {
+      "id": 4,
+      "name": "Đã thanh toán"
+    },
+    {
+      "id": 5,
+      "name": "Đã hủy"
+    }
+  ],
+  "orders": [],
+  "orderDetails": [
+    {
+      "id": 1,
+      "orderId": 1,
+      "productId": 2,
+      "quantity": 3,
+      "unitPrice": 85000
+    }
+  ],
+  "knowledgeFish": [
+    {
+      "id": 1,
+      "name": "Cá chép",
+      "characteristics": {
+        "appearance": "Thân dày, dẹp bên, vảy lớn, màu vàng ánh bạc, lưng sẫm hơn bụng. Có các loại như cá chép kính (ít vảy), cá chép nhiều vảy, cá chép da.",
+        "size": "Chiều dài lên đến 1.2m, cân nặng tối đa 37.3kg."
+      },
+      "behavior": "Sống ở tầng giữa và tầng đáy, thích nước sạch, ao hồ, sông suối. Ăn tạp, thích nghi tốt với môi trường nuôi.",
+      "favorite_bait": "Cỏ, Lá cây, Bột ngũ cốc, Giun, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Cá chép có giá trị dinh dưỡng cao, chứa omega-3, tốt cho phụ nữ mang thai. Phổ biến trong ẩm thực Việt Nam như cá chép om dưa, cháo cá chép. Tuổi thọ lên đến 47 năm."
+    },
+    {
+      "id": 2,
+      "name": "Cá trắm đen",
+      "characteristics": {
+        "appearance": "Thân dài, tròn, màu đen đậm, lưng tối, bụng trắng sữa, vây lưng lớn với 7-9 tia.",
+        "size": "Chiều dài 60-120cm, trọng lượng 3-10kg, có thể đạt 40-50kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước tĩnh như ao, hồ. Ít nổi lên mặt nước, thích ăn động vật.",
+      "favorite_bait": "Ốc, Hến, Tôm, Cua, Quả rụng như sung.",
+      "image_url": "https://dacsanbakien.com/wp-content/uploads/2021/10/ca-tram-den.jpg",
+      "info": "Thịt chắc, thơm, ít xương dăm. Phổ biến trong nuôi ghép, có giá trị kinh tế cao."
+    },
+    {
+      "id": 3,
+      "name": "Cá trắm trắng",
+      "characteristics": {
+        "appearance": "Thân dài, dạng ống tròn, lưng thẫm, thân vàng bìa, bụng trắng tro, miệng tròn, không râu.",
+        "size": "Trọng lượng 1-3kg, có thể đạt 9-12kg sau 3 năm."
+      },
+      "behavior": "Sống ở tầng giữa và đáy, thích nước sạch, ăn thực vật là chính.",
+      "favorite_bait": "Cỏ, Lá cây, Bèo, Bột ngũ cốc.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.vaMVjUjB7LmOpbAZKDOguQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt mềm, xương ít, dễ nuôi, năng suất cao. Phổ biến ở miền Bắc và miền Trung."
+    },
+    {
+      "id": 4,
+      "name": "Cá lóc",
+      "characteristics": {
+        "appearance": "Thân hình trụ dài, miệng rộng, răng sắc, màu đen vàng hoặc đốm xanh tùy môi trường. Vảy lưng đen ửng vàng ở ruộng cạn, trắng bụng ở nước sâu.",
+        "size": "Trọng lượng 5-7kg, chiều dài trung bình 50-70cm."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước tĩnh như ao, hồ, ruộng. Thích nghi tốt với môi trường khắc nghiệt.",
+      "favorite_bait": "Cá con, Tôm, Giun, Côn trùng.",
+      "image_url": "https://cdn.tgdd.vn/2021/10/CookRecipe/CookTipsNote/ca-loc-la-ca-gi-ca-loc-bao-nhieu-calo-va-an-ca-loc-co-tac-tipsnote-800x450-1.jpg",
+      "info": "Thịt ít mỡ, giàu vitamin, tốt cho tim mạch và phòng ung thư. Phổ biến trong món canh chua, kho tộ."
+    },
+    {
+      "id": 5,
+      "name": "Cá tra",
+      "characteristics": {
+        "appearance": "Thân dày, đầu nhỏ, 2 cặp râu dài, màu xám hoặc nâu sẫm, vây bụng 8-9 vạch.",
+        "size": "Chiều dài 50cm đến 1.5m, trọng lượng trung bình 1-3kg."
+      },
+      "behavior": "Sống ở tầng đáy, thích nước sâu, có thể sống ở nước lợ. Phân bố ở sông Mê Kông.",
+      "favorite_bait": "Cá tạp, Giáp xác, Mùn bã hữu cơ.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt mềm, giàu protein, xuất khẩu mạnh ở ĐBSCL. Dễ nuôi, giá trị kinh tế cao."
+    },
+    {
+      "id": 6,
+      "name": "Cá trê đen",
+      "characteristics": {
+        "appearance": "Thân đen dài, da nhẵn bóng, đầu dẹt, miệng rộng, 4 đôi râu dài, mắt nhỏ.",
+        "size": "Chiều dài trung bình 9.6cm, trọng lượng 100-500g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước tĩnh, thích nghi tốt với môi trường nghèo oxy.",
+      "favorite_bait": "Giun, Côn trùng, Cá con, Mùn bã hữu cơ.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt dai, ngọt, phổ biến ở Đông Nam Á. Nuôi dễ, giá trị kinh tế cao."
+    },
+    {
+      "id": 7,
+      "name": "Cá trê vàng",
+      "characteristics": {
+        "appearance": "Thân tròn, dẹp về đuôi, da trơn, vây đen có đốm thẫm, 4 đôi râu dài.",
+        "size": "Chiều dài trung bình 9.6cm, trọng lượng 100-500g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa ao, hồ, kênh rạch. Hoạt động mạnh về đêm.",
+      "favorite_bait": "Giun, Ốc, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt thơm, ít xương, dễ chế biến. Phổ biến ở miền Tây."
+    },
+    {
+      "id": 8,
+      "name": "Cá tai tượng",
+      "characteristics": {
+        "appearance": "Thân dẹt bên, miệng rộng, mõm nhọn, vây lưng dài, màu nâu hoặc xám.",
+        "size": "Chiều dài gấp đôi chiều cao, trọng lượng 3-5kg."
+      },
+      "behavior": "Sống ở nước lặng, nhiều cây thủy sinh. Thích nghi với nước lợ và nước ngọt.",
+      "favorite_bait": "Tôm, Cá con, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, dai, là đặc sản miền Tây. Nuôi phổ biến ở ĐBSCL."
+    },
+    {
+      "id": 9,
+      "name": "Cá chim trắng",
+      "characteristics": {
+        "appearance": "Thân phẳng, vây đuôi chẻ, vây ngực dài, ít vảy, màu trắng bạc.",
+        "size": "Trọng lượng 4-6kg, thường dưới 1kg do đánh bắt quá mức."
+      },
+      "behavior": "Sống ở tầng giữa và đáy, kiếm ăn theo đàn. Phân bố ở Đông Nam Á.",
+      "favorite_bait": "Động vật phù du, Tảo, Mùn bã hữu cơ.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt mềm, thơm, ít xương. Nuôi nhanh, đạt 0.8-1kg sau 3-4 tháng."
+    },
+    {
+      "id": 10,
+      "name": "Cá diêu hồng",
+      "characteristics": {
+        "appearance": "Thân bầu dục, vảy nhỏ màu hồng hoặc vàng nhạt, vây lưng và đuôi sặc sỡ.",
+        "size": "Chiều dài 20-30cm, trọng lượng 0.5-1kg."
+      },
+      "behavior": "Sống ở tầng giữa và đáy, bơi theo đàn. Phổ biến ở ĐBSCL.",
+      "favorite_bait": "Tảo, Mùn bã hữu cơ, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, ít tanh, bổ khí huyết. Phù hợp cho trẻ em và người già."
+    },
+    {
+      "id": 11,
+      "name": "Cá rô đồng",
+      "characteristics": {
+        "appearance": "Thân dẹp, vảy nhỏ, màu xám hoặc nâu, có sọc đen dọc thân.",
+        "size": "Chiều dài 15-20cm, trọng lượng 100-300g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa ao, ruộng, kênh rạch. Thích nghi tốt với môi trường cạn.",
+      "favorite_bait": "Giun, Côn trùng, Tôm.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt thơm, giàu dinh dưỡng. Phổ biến trong món chiên giòn, canh cải."
+    },
+    {
+      "id": 12,
+      "name": "Cá mè hoa",
+      "characteristics": {
+        "appearance": "Thân dẹp, thon dài, vảy nhỏ màu trắng, 9-12 sọc đen từ lưng xuống bụng.",
+        "size": "Chiều dài 60-146cm, trọng lượng tối đa 40kg."
+      },
+      "behavior": "Sống ở tầng giữa và mặt nước, lọc nước kiếm ăn, bơi theo đàn.",
+      "favorite_bait": "Động vật phù du, Thực vật, Mùn bã hữu cơ.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt tanh, ít được ưa chuộng. Nuôi để cải thiện chất lượng nước."
+    },
+    {
+      "id": 13,
+      "name": "Cá mè trắng",
+      "characteristics": {
+        "appearance": "Thân dẹp, vảy trắng sáng, ít sọc hơn cá mè hoa, lưng xám.",
+        "size": "Trọng lượng 2-10kg, chiều dài 50-100cm."
+      },
+      "behavior": "Sống ở tầng mặt nước, ăn lọc, bơi theo đàn. Ít hoạt động khi trời lạnh.",
+      "favorite_bait": "Động vật phù du, Tảo.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt mềm, nhiều xương. Thường dùng làm thức ăn chăn nuôi."
+    },
+    {
+      "id": 14,
+      "name": "Cá ngát",
+      "characteristics": {
+        "appearance": "Thân tròn, da trơn, đầu nhỏ, 2 cặp râu, màu xám hoặc nâu.",
+        "size": "Chiều dài 30-50cm, trọng lượng 0.5-2kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước ngọt và lợ. Phân bố ở An Giang, Đồng Tháp.",
+      "favorite_bait": "Tôm, Cá con, Giun, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt thơm, giá trị ẩm thực cao, nhưng số lượng ít."
+    },
+    {
+      "id": 15,
+      "name": "Cá basa",
+      "characteristics": {
+        "appearance": "Thân dày, đầu bằng, mắt to, râu mép dài, vảy trắng hoặc xám.",
+        "size": "Chiều dài 50-100cm, trọng lượng 1-5kg."
+      },
+      "behavior": "Sống ở tầng đáy, thích nước sâu, phân bố ở ĐBSCL.",
+      "favorite_bait": "Cá tạp, Tôm, Mùn bã hữu cơ.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt trắng, ngọt, xuất khẩu mạnh. Dễ nhầm với cá tra."
+    },
+    {
+      "id": 16,
+      "name": "Cá kèo",
+      "characteristics": {
+        "appearance": "Thân trụ dài, vảy nhỏ, màu xám vàng, đầu nhọn, mõm tù, không râu.",
+        "size": "Chiều dài dưới 25cm, trọng lượng 30-40g."
+      },
+      "behavior": "Sống ở ven sông, kênh rạch nhiều bùn. Thích nước lợ và ngọt.",
+      "favorite_bait": "Tép, Giun.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt mềm, ngọt, giàu vitamin. Phổ biến ở món kho, lẩu."
+    },
+    {
+      "id": 17,
+      "name": "Cá diếc",
+      "characteristics": {
+        "appearance": "Thân ngắn, dẹp, vảy lớn, màu bạc, mắt đỏ, không râu.",
+        "size": "Chiều dài 15-25cm, trọng lượng 100-300g."
+      },
+      "behavior": "Sống ở ao, ruộng, kênh rạch. Chậm lớn, thích nghi tốt.",
+      "favorite_bait": "Giun, Côn trùng, Tảo.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, tốt cho phụ nữ mang thai. Nhiều xương dăm."
+    },
+    {
+      "id": 18,
+      "name": "Cá chạch",
+      "characteristics": {
+        "appearance": "Thân dài, nhiều nhớt, màu xám đen, bụng nhạt, giống lươn.",
+        "size": "Chiều dài 30-50cm, trọng lượng 1-2kg."
+      },
+      "behavior": "Sống ở tầng đáy sông, ao, ruộng. Thích nghi với môi trường bùn.",
+      "favorite_bait": "Giun, Côn trùng, Tôm.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ít mỡ, giàu đạm. Tốt cho sức khỏe, món kho, áp chảo."
+    },
+    {
+      "id": 19,
+      "name": "Cá bống tượng",
+      "characteristics": {
+        "appearance": "Thân thon, hình thoi, đầu dẹt, màu nâu, vảy nhỏ.",
+        "size": "Chiều dài 10-20cm, trọng lượng 100-300g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước ngọt, phân bố ở ĐBSCL.",
+      "favorite_bait": "Tép, Côn trùng, Cá con.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt trắng, ngọt, giống thịt gà. Phổ biến ở món kho, hấp."
+    },
+    {
+      "id": 20,
+      "name": "Cá sặc",
+      "characteristics": {
+        "appearance": "Thân dẹt, vây ngực dài, vây đuôi xẻ, 2 râu dài, sọc nổi bật.",
+        "size": "Chiều dài 10-15cm, trọng lượng 50-200g."
+      },
+      "behavior": "Sống ở nước lặng, nhiều cây thủy sinh. Phân bố ở miền Tây.",
+      "favorite_bait": "Côn trùng, Tôm.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, dai, phù hợp làm khô, chiên giòn, kho tộ."
+    },
+    {
+      "id": 21,
+      "name": "Cá thát lát",
+      "characteristics": {
+        "appearance": "Thân dài, dẹt, vảy nhỏ, màu xám lưng, trắng bụng, vàng gần nắp mang.",
+        "size": "Chiều dài 400mm, trọng lượng 200-500g."
+      },
+      "behavior": "Sống ở tầng giữa, ưa ao, hồ, sông suối. Bơi theo đàn.",
+      "favorite_bait": "Tôm, Cá con, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt dai, làm chả cá nổi tiếng. Phổ biến ở Đông Nam Á."
+    },
+    {
+      "id": 22,
+      "name": "Cá trích",
+      "characteristics": {
+        "appearance": "Thân dài, vảy mỏng, màu xanh nhạt, hai hàm bằng nhau, răng nhỏ.",
+        "size": "Chiều dài 20-30cm, trọng lượng 100-300g."
+      },
+      "behavior": "Sống ở tầng giữa, bơi theo đàn, phân bố ở sông ngòi.",
+      "favorite_bait": "Động vật phù du, Tôm, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt trắng, béo, nhiều xương. Phổ biến ở miền Trung."
+    },
+    {
+      "id": 23,
+      "name": "Cá chình",
+      "characteristics": {
+        "appearance": "Thân thuôn dài, giống lươn, da trần, màu nâu, bụng trắng.",
+        "size": "Chiều dài 40-50cm, có thể đạt 1m."
+      },
+      "behavior": "Di cư từ biển vào sông, sống ở tầng đáy. Hoạt động về đêm.",
+      "favorite_bait": "Giun, Tôm, Cá con.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt dai, thơm, chế biến lẩu, nướng. Nuôi ở Đà Lạt, Sapa."
+    },
+    {
+      "id": 24,
+      "name": "Cá bống rồng",
+      "characteristics": {
+        "appearance": "Thân nhỏ, vây lưng nhọn, màu xanh hoặc nâu, vảy sáng.",
+        "size": "Chiều dài 5-10cm, trọng lượng 20-50g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước sạch, thích hợp nuôi cảnh.",
+      "favorite_bait": "Côn trùng, Tôm, Tảo.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Loài cá cảnh đẹp, phổ biến ở bể thủy sinh."
+    },
+    {
+      "id": 25,
+      "name": "Cá heo",
+      "characteristics": {
+        "appearance": "Thân láng, màu vàng, vằn đen ngang, 2 ngạnh bén bên mang.",
+        "size": "Chiều dài 10-20cm, trọng lượng 100-300g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước ngầm, thích ăn rong.",
+      "favorite_bait": "Rong, Tép, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt béo, phổ biến ở Long Xuyên, Châu Đốc."
+    },
+    {
+      "id": 26,
+      "name": "Cá trèn lá",
+      "characteristics": {
+        "appearance": "Thân mỏng, không vảy, đuôi mỏng, 2 râu, màu nâu.",
+        "size": "Chiều dài 15-25cm, trọng lượng 50-200g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước ngọt, thích bùn lầy.",
+      "favorite_bait": "Tép, Giun, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt trong, sụn giòn, phổ biến ở miền Tây."
+    },
+    {
+      "id": 27,
+      "name": "Cá trèn bầu",
+      "characteristics": {
+        "appearance": "Thân mũm mĩm, không vảy, bụng lớn, 2 râu, màu nâu.",
+        "size": "Chiều dài 15-25cm, trọng lượng 100-300g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa kênh rạch nhiều bùn.",
+      "favorite_bait": "Tép, Giun, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, chế biến kho, chiên. Phân bố ở ĐBSCL."
+    },
+    {
+      "id": 28,
+      "name": "Cá chài",
+      "characteristics": {
+        "appearance": "Thân thon, môi và đuôi đỏ, vảy lớn, màu nâu.",
+        "size": "Chiều dài 20-30cm, trọng lượng 200-500g."
+      },
+      "behavior": "Sống ở tầng giữa, ưa nước chảy, kiếm ăn theo đàn.",
+      "favorite_bait": "Bắp hầm, Hột bưởi, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, dễ câu, phổ biến mùa nước lên."
+    },
+    {
+      "id": 29,
+      "name": "Cá ngựa",
+      "characteristics": {
+        "appearance": "Thân thon, vảy to, 2 hàng vảy sậm gần mang, màu nâu.",
+        "size": "Chiều dài 20-30cm, trọng lượng 200-400g."
+      },
+      "behavior": "Sống ở tầng giữa, ưa nước chảy mạnh, hay nhảy khỏi mặt nước.",
+      "favorite_bait": "Cá lòng tong, Côn trùng, Tôm.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt dai, phổ biến ở miền Tây, dễ câu ở vàm mương."
+    },
+    {
+      "id": 30,
+      "name": "Cá hú",
+      "characteristics": {
+        "appearance": "Thân tròn, vảy trắng, đầu nhỏ, 2 cặp râu, màu xám.",
+        "size": "Chiều dài 50-100cm, trọng lượng 1-5kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước sâu, phân bố ở ĐBSCL.",
+      "favorite_bait": "Tôm, Cá con, Giáp xác.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, béo, chế biến lẩu, kho. Giá trị kinh tế cao."
+    },
+    {
+      "id": 31,
+      "name": "Cá bông lau",
+      "characteristics": {
+        "appearance": "Thân ngắn, bụng béo, vảy trắng, màu xám hoặc bạc.",
+        "size": "Chiều dài 50-80cm, trọng lượng 2-6kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước ngọt và lợ, phân bố ở sông Mê Kông.",
+      "favorite_bait": "Tôm, Cá con, Mùn bã hữu cơ.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt béo, thơm, chế biến kho, hấp. Phổ biến ở miền Tây."
+    },
+    {
+      "id": 32,
+      "name": "Cá vồ đém",
+      "characteristics": {
+        "appearance": "Thân tròn, 2 chấm đen gần mang, vảy trắng, màu xám.",
+        "size": "Chiều dài 50-100cm, trọng lượng 2-5kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước sâu, thích nghi tốt.",
+      "favorite_bait": "Tôm, Cá con, Giáp xác.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt dai, ngọt, giá trị kinh tế cao. Phân bố ở ĐBSCL."
+    },
+    {
+      "id": 33,
+      "name": "Cá xác sọc",
+      "characteristics": {
+        "appearance": "Thân dẹt, vảy nhỏ, màu xám, sọc dọc thân, giống cá bụng.",
+        "size": "Chiều dài 20-30cm, trọng lượng 100-300g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa kênh rạch, thích ăn mồi nhỏ.",
+      "favorite_bait": "Gián, Côn trùng, Tép.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, chế biến kho, chiên. Phổ biến ở miền Tây."
+    },
+    {
+      "id": 34,
+      "name": "Cá bụng",
+      "characteristics": {
+        "appearance": "Thân dẹt, vảy trắng, bụng dày, màu xám hoặc bạc.",
+        "size": "Chiều dài 20-30cm, trọng lượng 100-300g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước ngọt, thích ăn mồi nhỏ.",
+      "favorite_bait": "Gián, Tép, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt béo, chế biến kho, chiên. Phân bố ở ĐBSCL."
+    },
+    {
+      "id": 35,
+      "name": "Cá bống mú",
+      "characteristics": {
+        "appearance": "Thân thuôn, vảy nhỏ, đầu nhô, màu nâu, 2 vây lưng nhọn.",
+        "size": "Chiều dài 10-15cm, trọng lượng 50-150g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước ngọt, phân bố ở sông ngòi.",
+      "favorite_bait": "Tép, Côn trùng, Cá con.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, chế biến kho, chiên giòn. Phổ biến ở miền Tây."
+    },
+    {
+      "id": 36,
+      "name": "Cá bống trứng",
+      "characteristics": {
+        "appearance": "Thân nhỏ, vảy mịn, màu nâu, đầu nhô, vây lưng nhọn.",
+        "size": "Chiều dài 8-12cm, trọng lượng 20-100g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa kênh rạch, thích nghi với bùn lầy.",
+      "favorite_bait": "Tép, Côn trùng, Mùn bã hữu cơ.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt mềm, chế biến kho, chiên. Phổ biến ở ĐBSCL."
+    },
+    {
+      "id": 37,
+      "name": "Cá bống rạ",
+      "characteristics": {
+        "appearance": "Thân thuôn, vảy nhỏ, màu xám, đầu nhô, vây lưng cứng.",
+        "size": "Chiều dài 8-12cm, trọng lượng 20-100g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa ruộng, kênh rạch, thích bùn.",
+      "favorite_bait": "Tép, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, chế biến kho, chiên giòn. Phân bố ở miền Tây."
+    },
+    {
+      "id": 38,
+      "name": "Cá hường",
+      "characteristics": {
+        "appearance": "Thân tròn, vảy nhỏ, màu xám hoặc vàng nhạt, đầu nhỏ.",
+        "size": "Chiều dài 20-30cm, trọng lượng 0.5-1kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa ao, hồ, kênh rạch. Dễ nuôi.",
+      "favorite_bait": "Giun, Côn trùng, Tôm.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt mềm, ít tanh, chế biến kho, chiên. Phổ biến ở miền Tây."
+    },
+    {
+      "id": 39,
+      "name": "Cá lăng",
+      "characteristics": {
+        "appearance": "Thân dài, da trơn, màu xám hoặc nâu, đầu dẹt, râu dài.",
+        "size": "Chiều dài 50-100cm, trọng lượng 2-5kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa sông ngòi, thích nghi với nước chảy.",
+      "favorite_bait": "Cá con, Tôm, Giáp xác.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, dai, chế biến lẩu, nướng. Giá trị kinh tế cao."
+    },
+    {
+      "id": 40,
+      "name": "Cá đù",
+      "characteristics": {
+        "appearance": "Thân dẹt, vảy nhỏ, màu bạc hoặc xám, vây đuôi chẻ.",
+        "size": "Chiều dài 20-30cm, trọng lượng 200-500g."
+      },
+      "behavior": "Sống ở tầng giữa, ưa sông, hồ, thích nghi với nước lợ.",
+      "favorite_bait": "Tôm, Cá con, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt mềm, thơm, chế biến kho, chiên. Phổ biến ở miền Tây."
+    },
+    {
+      "id": 41,
+      "name": "Cá nheo",
+      "characteristics": {
+        "appearance": "Thân dài, da trơn, màu xám, đầu dẹt, 4 đôi râu, mắt nhỏ.",
+        "size": "Chiều dài 50-100cm, trọng lượng 1-5kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước tĩnh, hoạt động mạnh về đêm.",
+      "favorite_bait": "Cá con, Tôm, Giun, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt dai, ngọt, chế biến kho, nướng. Phổ biến ở miền Bắc."
+    },
+    {
+      "id": 42,
+      "name": "Cá trạch",
+      "characteristics": {
+        "appearance": "Thân dài, da trơn, màu xám hoặc nâu, giống lươn, không vảy.",
+        "size": "Chiều dài 30-50cm, trọng lượng 100-500g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa bùn lầy, ao, ruộng.",
+      "favorite_bait": "Giun, Côn trùng, Tôm.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, ít mỡ, chế biến kho, chiên. Phổ biến ở miền Tây."
+    },
+    {
+      "id": 43,
+      "name": "Cá bướm điên điển",
+      "characteristics": {
+        "appearance": "Thân nhỏ, màu sắc nổi bật, vây lưng dài, màu đen hoặc xanh.",
+        "size": "Chiều dài 5-10cm, trọng lượng 20-50g."
+      },
+      "behavior": "Sống ở tầng giữa, ưa nước sạch, phù hợp nuôi cảnh.",
+      "favorite_bait": "Tảo, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Loài cá cảnh đẹp, phổ biến ở bể thủy sinh."
+    },
+    {
+      "id": 44,
+      "name": "Cá bã trầu",
+      "characteristics": {
+        "appearance": "Thân nhỏ, màu nâu hoặc xanh, vảy sáng, 6-7cm.",
+        "size": "Chiều dài 6-7cm, trọng lượng 10-30g."
+      },
+      "behavior": "Sống ở tầng giữa, ưa ruộng ngập nước, bơi theo đàn.",
+      "favorite_bait": "Tảo, Côn trùng, Mùn bã hữu cơ.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Loài cá cảnh, có tập tính chọi nhau ở con đực."
+    },
+    {
+      "id": 45,
+      "name": "Cá tra dầu",
+      "characteristics": {
+        "appearance": "Thân dài, da trơn, màu xám, đầu nhỏ, râu dài.",
+        "size": "Chiều dài lên đến 3m, trọng lượng gần 300kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước sâu, phân bố ở sông Mê Kông.",
+      "favorite_bait": "Cá con, Tôm, Giáp xác.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Loài cá nước ngọt lớn nhất ĐBSCL, thịt béo, giá trị kinh tế cao."
+    },
+    {
+      "id": 46,
+      "name": "Cá vồ cờ",
+      "characteristics": {
+        "appearance": "Thân dài, da trơn, màu xám, vây lớn, râu dài.",
+        "size": "Chiều dài 2-3m, trọng lượng gần 290kg."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước sâu, phân bố ở sông Mê Kông.",
+      "favorite_bait": "Cá con, Tôm, Giáp xác.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Loài cá lớn, thịt ngọt, hiếm gặp, giá trị kinh tế cao."
+    },
+    {
+      "id": 47,
+      "name": "Cá leo",
+      "characteristics": {
+        "appearance": "Thân dài, da trơn, màu xám, đầu lớn, 2 râu, giống cá trèn.",
+        "size": "Chiều dài 30-50cm, trọng lượng 200-500g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa nước ngọt, thích bùn lầy.",
+      "favorite_bait": "Tép, Giun, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, chế biến kho, chiên. Phân bố ở ĐBSCL."
+    },
+    {
+      "id": 48,
+      "name": "Cá kết",
+      "characteristics": {
+        "appearance": "Thân tròn, da trơn, màu xám, đầu lớn, 2 râu, giống cá trèn.",
+        "size": "Chiều dài 30-50cm, trọng lượng 200-500g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa kênh rạch, thích bùn lầy.",
+      "favorite_bait": "Tép, Giun, Côn trùng.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt dai, chế biến kho, chiên. Phổ biến ở miền Tây."
+    },
+    {
+      "id": 49,
+      "name": "Cá chạch bùn",
+      "characteristics": {
+        "appearance": "Thân dài, nhiều nhớt, màu hồng, cam, xám, có chấm đen.",
+        "size": "Chiều dài 30.5cm, trọng lượng 100-200g."
+      },
+      "behavior": "Sống ở tầng đáy, ưa bùn lầy, ao, ruộng.",
+      "favorite_bait": "Giun, Côn trùng, Tôm.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt ngọt, ít mỡ, chế biến kho, áp chảo."
+    },
+    {
+      "id": 50,
+      "name": "Cá rô phi đen",
+      "characteristics": {
+        "appearance": "Thân bầu dục, vảy nhỏ, màu xám hoặc đen, sọc dọc thân.",
+        "size": "Chiều dài 20-30cm, trọng lượng 0.5-1kg."
+      },
+      "behavior": "Sống ở tầng giữa và đáy, bơi theo đàn, ăn tạp.",
+      "favorite_bait": "Tảo, Mùn bã hữu cơ, Côn trùng, Cá con.",
+      "image_url": "https://tse4.mm.bing.net/th/id/OIP.ddM8QYEGU_EoogK9VW7BrgHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "info": "Thịt trắng, ngọt, dễ nuôi, năng suất cao."
+    }
+  ]
 }

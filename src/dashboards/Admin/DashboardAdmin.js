@@ -43,9 +43,14 @@ function DashboardAdmin() {
           .sidebar {
             background: linear-gradient(180deg, #1a2a44, #2c3e50);
             height: 100vh;
-            transition: width 0.3s ease;
+            transition: all 0.3s ease;
             overflow-y: auto;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            width: ${sidebarOpen ? '250px' : '70px'};
           }
           .sidebar.collapsed {
             width: 70px;
@@ -78,7 +83,9 @@ function DashboardAdmin() {
             background: #f3f4f6;
             min-height: 100vh;
             animation: fadeIn 0.5s ease-in;
-            padding: 30px;
+            padding: 0 30px 30px 30px;
+            margin-left: ${sidebarOpen ? '250px' : '70px'};
+            transition: margin-left 0.3s ease;
           }
           @keyframes fadeIn {
             from { opacity: 0; }
@@ -121,7 +128,7 @@ function DashboardAdmin() {
               position: fixed;
               z-index: 1000;
               width: 250px;
-              transform: translateX(${sidebarOpen ? "0" : "-250px"});
+              transform: translateX(${sidebarOpen ? '0' : '-100%'});
             }
             .content-area {
               margin-left: 0 !important;
@@ -130,77 +137,74 @@ function DashboardAdmin() {
         `}
       </style>
       <Container fluid className="p-0">
-        <Row className="g-0">
-      
-          <Col
-            md={sidebarOpen ? 2 : 1}
-            className={`sidebar ${!sidebarOpen ? "collapsed" : ""}`}
+        <div
+          className={`sidebar ${!sidebarOpen ? "collapsed" : ""}`}
+        >
+          <Button
+            className="toggle-btn d-md-none"
+            onClick={toggleSidebar}
+            aria-label="Toggle Sidebar"
           >
-            <Button
-              className="toggle-btn d-md-none"
-              onClick={toggleSidebar}
-              aria-label="Toggle Sidebar"
-            >
-              <FaBars />
-            </Button>
-            <Nav className="flex-column">
-              <div className="user-info">
-                <FaUserCircle />
-                <div className="user-info-text">
-                  <h6 className="mb-0">{user?.username || "Admin"}</h6>
-                  <small>{user?.email || "Guest"}</small>
-                </div>
+            <FaBars />
+          </Button>
+          <Nav className="flex-column">
+            <div className="user-info">
+              <FaUserCircle />
+              <div className="user-info-text">
+                <h6 className="mb-0">{user?.username || "Admin"}</h6>
+                <small>{user?.email || "Guest"}</small>
               </div>
-              <NavLink
-                to="/admin/users"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : ""}`
-                }
-              >
-                <FaUsers />
-                <span className="nav-link-text">Users</span>
-              </NavLink>
-              <NavLink
-                to="/admin/products"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : ""}`
-                }
-              >
-                <FaBox />
-                <span className="nav-link-text">Products</span>
-              </NavLink>
-              <NavLink
-                to="/admin/posts"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : ""}`
-                }
-              >
-                <FaNewspaper />
-                <span className="nav-link-text">Posts</span>
-              </NavLink>
-              <NavLink
-                to="/admin/knowledge"
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : ""}`
-                }
-              >
-                <FaBook />
-                <span className="nav-link-text">Knowledge</span>
-              </NavLink>
-              <Nav.Link
-                className="nav-link mt-auto border-top"
-                onClick={handleLogout}
-              >
-                <FaSignOutAlt />
-                <span className="nav-link-text">Logout</span>
-              </Nav.Link>
-            </Nav>
-          </Col>
-          {/* Content Area */}
-          <Col md={sidebarOpen ? 10 : 11} className="content-area">
-            <Outlet />
-          </Col>
-        </Row>
+            </div>
+            <NavLink
+              to="/admin/users"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+            >
+              <FaUsers />
+              <span className="nav-link-text">Users</span>
+            </NavLink>
+            <NavLink
+              to="/admin/products"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+            >
+              <FaBox />
+              <span className="nav-link-text">Products</span>
+            </NavLink>
+            <NavLink
+              to="/admin/posts"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+            >
+              <FaNewspaper />
+              <span className="nav-link-text">Posts</span>
+            </NavLink>
+            <NavLink
+              to="/admin/knowledge"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+            >
+              <FaBook />
+              <span className="nav-link-text">Knowledge</span>
+            </NavLink>
+            <Nav.Link
+              className="nav-link mt-auto border-top"
+              onClick={handleLogout}
+            >
+              <FaSignOutAlt />
+              <span className="nav-link-text">Logout</span>
+            </Nav.Link>
+          </Nav>
+        </div>
+        
+        {/* Content Area */}
+        <div className="content-area">
+          <Outlet />
+        </div>
       </Container>
     </>
   );

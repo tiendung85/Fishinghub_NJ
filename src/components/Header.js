@@ -10,28 +10,6 @@ function Header() {
   const currentPath = location.pathname;
 
   const { user, logout } = useAuth(); // ✅ auth state from context
-  const [cartCount, setCartCount] = useState(0); // ✅ cart count state
-
-  // 🔄 Load cart count from localStorage
- useEffect(() => {
-  const updateCartCount = () => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const total = storedCart.reduce((sum, item) => sum + item.quantity, 0);
-    setCartCount(total);
-  };
-
-  // Run once on mount
-  updateCartCount();
-
-  // ✅ Listen to both localStorage & custom event
-  window.addEventListener("cartUpdated", updateCartCount);
-  window.addEventListener("storage", updateCartCount);
-
-  return () => {
-    window.removeEventListener("cartUpdated", updateCartCount);
-    window.removeEventListener("storage", updateCartCount);
-  };
-}, []);
 
   const handleLogout = () => {
     logout(); // ✅ clear user
@@ -74,9 +52,6 @@ function Header() {
                   Xin chào, {user.username || user.name || "người dùng"}
                 </span>
 
-                {/* ✅ Giỏ hàng with item count */}
-
-
                 <Button
                   variant="outline-danger"
                   className="rounded-pill px-4 fw-semibold shadow-sm"
@@ -89,10 +64,10 @@ function Header() {
                   as={Link}
                   to="/cart"
                   variant="outline-success"
-                  className="rounded-pill ms-2 px-4 fw-semibold shadow-sm" // 👈 added ms-2 here
+                  className="rounded-pill ms-2 px-4 fw-semibold shadow-sm"
                   style={{ borderWidth: 2 }}
                 >
-                  🛒 Giỏ hàng ({cartCount})
+                  🛒 Giỏ hàng
                 </Button>
               </>
             ) : (

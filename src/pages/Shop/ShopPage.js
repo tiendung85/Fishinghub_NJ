@@ -17,7 +17,6 @@ export default function Shop() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("default");
 
@@ -60,28 +59,41 @@ export default function Shop() {
     setFilteredProducts(updated);
   }, [searchTerm, sortOption, products]);
 
-  const updateCart = (newCart) => {
-    setCart(newCart);
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    window.dispatchEvent(new CustomEvent("cartUpdated"));
-  };
-
-  const handleBuyClick = (product) => {
+  const handleBuyClick = async (product) => {
     if (!user) {
       navigate("/login");
       return;
     }
 
-    const existingCart = [...cart];
-    const index = existingCart.findIndex((item) => item.id === product.id);
+    try {
+      const res = await fetch(`http://localhost:9999/shoppingCart?userId=${user.id}&productId=${product.id}`);
+      const existing = await res.json();
 
-    if (index >= 0) {
-      existingCart[index].quantity += 1;
-    } else {
-      existingCart.push({ ...product, quantity: 1 });
+      if (existing.length > 0) {
+        const updatedItem = existing[0];
+        await fetch(`http://localhost:9999/shoppingCart/${updatedItem.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ quantity: updatedItem.quantity + 1 }),
+        });
+      } else {
+        await fetch("http://localhost:9999/shoppingCart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: user.id,
+            productId: product.id,
+            quantity: 1,
+          }),
+        });
+      }
+
+      alert("Đã thêm vào giỏ hàng!");
+      window.dispatchEvent(new CustomEvent("cartUpdated"));
+    } catch (error) {
+      console.error("Lỗi thêm vào giỏ:", error);
+      alert("Không thể thêm vào giỏ hàng.");
     }
-
-    updateCart(existingCart);
   };
 
   return (
@@ -100,18 +112,16 @@ export default function Shop() {
           />
         </Col>
         <Col xs={12} md={3} className="mb-2">
-         <Form.Select
-  value={sortOption}
-  onChange={(e) => setSortOption(e.target.value)}
-  className="rounded-pill py-3 px-3 fs-5 shadow-sm"
- 
->
-  <option value="default">Sản phẩm nổi bật</option>
-  <option value="price-asc">Giá tăng dần</option>
-  <option value="price-desc">Giá giảm dần</option>
-  <option value="name-asc">Tên A-Z</option>
-  
-</Form.Select>
+          <Form.Select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="rounded-pill py-3 px-3 fs-5 shadow-sm"
+          >
+            <option value="default">Sản phẩm nổi bật</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+            <option value="name-asc">Tên A-Z</option>
+          </Form.Select>
         </Col>
       </Row>
 

@@ -4,7 +4,7 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    // Initialize from localStorage if available
+    // ✅ Initialize from localStorage if available
     const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
@@ -19,16 +19,16 @@ export function AuthProvider({ children }) {
 
     if (foundUser) {
       setUser(foundUser);
-      localStorage.setItem("user", JSON.stringify(foundUser)); 
-      return foundUser; 
+      localStorage.setItem("user", JSON.stringify(foundUser)); // ✅ Persist to localStorage
+      return true;
     }
 
-    return null; 
+    return false;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user"); 
+    localStorage.removeItem("user"); // ✅ Remove on logout
   };
 
   return (

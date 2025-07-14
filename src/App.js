@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
@@ -15,7 +16,7 @@ import AdminProducts from './dashboards/Admin/Products';
 import AdminPosts from './dashboards/Admin/Posts';
 import AdminKnowledge from './dashboards/Admin/Knowledge';
 import { AuthProvider } from './pages/Auth/AuthContext';
-
+import OrderAdmin from './dashboards/Admin/Orders';
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +29,7 @@ function App() {
             <Route path="products" element={<AdminProducts />} />
             <Route path="posts" element={<AdminPosts />} />
             <Route path="knowledge" element={<AdminKnowledge />} />
+            <Route path="/admin/orders" element={<OrderAdmin />} />
           </Route>
           {/* Other routes with Header and Footer */}
           <Route

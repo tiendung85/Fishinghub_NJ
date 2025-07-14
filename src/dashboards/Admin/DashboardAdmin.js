@@ -3,14 +3,14 @@ import { useAuth } from "../../pages/Auth/AuthContext";
 import { useNavigate, Outlet, NavLink } from "react-router-dom";
 import { Container, Row, Col, Nav, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { 
-  FaUsers, 
-  FaBox, 
-  FaNewspaper, 
-  FaBook, 
-  FaSignOutAlt, 
-  FaUserCircle, 
-  FaBars 
+import {
+  FaUsers,
+  FaBox,
+  FaNewspaper,
+  FaBook,
+  FaSignOutAlt,
+  FaUserCircle,
+  FaBars
 } from "react-icons/fa";
 
 function DashboardAdmin() {
@@ -31,7 +31,7 @@ function DashboardAdmin() {
     navigate("/login");
   };
 
-  
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -131,7 +131,7 @@ function DashboardAdmin() {
       </style>
       <Container fluid className="p-0">
         <Row className="g-0">
-      
+
           <Col
             md={sidebarOpen ? 2 : 1}
             className={`sidebar ${!sidebarOpen ? "collapsed" : ""}`}
@@ -187,6 +187,17 @@ function DashboardAdmin() {
                 <FaBook />
                 <span className="nav-link-text">Knowledge</span>
               </NavLink>
+
+              <NavLink
+                to="/admin/orders"
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                <FaBox />
+                <span className="nav-link-text">Orders</span>
+              </NavLink>
+
               <Nav.Link
                 className="nav-link mt-auto border-top"
                 onClick={handleLogout}

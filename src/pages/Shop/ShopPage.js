@@ -16,6 +16,8 @@ export default function Shop() {
   const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categories, setCategories] = useState([]); // ✅ NEW: category list
+  const [selectedCategoryId, setSelectedCategoryId] = useState("All"); // ✅ NEW: selected category
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("default");
@@ -23,18 +25,37 @@ export default function Shop() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:9999/shop")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setFilteredProducts(data);
-      })
-      .catch((err) => console.error("Error fetching products:", err))
-      .finally(() => setLoading(false));
+    const fetchData = async () => {
+      try {
+        const [productRes, categoryRes] = await Promise.all([
+          fetch("http://localhost:9999/shop"),
+          fetch("http://localhost:9999/categories"),
+        ]);
+
+        const productsData = await productRes.json();
+        const categoriesData = await categoryRes.json();
+
+        setProducts(productsData);
+        setFilteredProducts(productsData);
+        setCategories([{ id: "All", name: "Tất cả danh mục" }, ...categoriesData]); 
+      } catch (err) {
+        console.error("Error fetching products or categories:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
     let updated = [...products];
+
+    
+    if (selectedCategoryId !== "All") {
+      updated = updated.filter(p => String(p.CategoryId) === String(selectedCategoryId));
+    }
+
 
     if (searchTerm) {
       updated = updated.filter(p =>
@@ -42,6 +63,7 @@ export default function Shop() {
       );
     }
 
+  
     switch (sortOption) {
       case "price-asc":
         updated.sort((a, b) => a.price - b.price);
@@ -57,7 +79,7 @@ export default function Shop() {
     }
 
     setFilteredProducts(updated);
-  }, [searchTerm, sortOption, products]);
+  }, [searchTerm, sortOption, selectedCategoryId, products]);
 
   const handleBuyClick = async (product) => {
     if (!user) {
@@ -98,10 +120,10 @@ export default function Shop() {
 
   return (
     <Container className="pt-5 mt-5">
-      <h1 className="text-center fw-bold mb-4">📦 Sản phẩm</h1>
+      <h1 className="text-center fw-bold mb-4"> Sản phẩm</h1>
 
       <Row className="mb-4 gx-3">
-        <Col xs={12} md={9} className="mb-2">
+        <Col xs={12} md={6} className="mb-2">
           <Form.Control
             type="text"
             placeholder="🔍 Tìm kiếm sản phẩm..."
@@ -111,7 +133,21 @@ export default function Shop() {
             style={{ height: "56px" }}
           />
         </Col>
-        <Col xs={12} md={3} className="mb-2">
+        
+        <Col xs={6} md={3} className="mb-2">
+          <Form.Select
+            value={selectedCategoryId}
+            onChange={(e) => setSelectedCategoryId(e.target.value)}
+            className="rounded-pill py-3 px-3 fs-5 shadow-sm"
+          >
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </Form.Select>
+        </Col>
+        <Col xs={6} md={3} className="mb-2">
           <Form.Select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
@@ -154,9 +190,7 @@ export default function Shop() {
                     <p className="mb-1 fw-semibold text-primary">
                       Giá: {product.price.toLocaleString()} VND
                     </p>
-                    <p className="mb-3 text-secondary" style={{ fontSize: "0.85rem" }}>
-                      Còn lại: {product.StockQuantity}
-                    </p>
+                  
                     <Button
                       variant="primary"
                       className="w-100 rounded-pill fw-semibold shadow-sm"

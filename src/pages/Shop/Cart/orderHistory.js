@@ -8,6 +8,7 @@ function OrderHistory() {
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [detailsMap, setDetailsMap] = useState({});
+  const [products, setProducts] = useState([]); 
 
   const getStatusName = (statusId) => {
     switch (statusId) {
@@ -25,12 +26,19 @@ function OrderHistory() {
 
     const fetchOrders = async () => {
       try {
-        const res = await fetch(`http://localhost:9999/orders?userId=${user.id}&_sort=id&_order=desc`);
-        const data = await res.json();
-        setOrders(data);
+        const [orderRes, productRes] = await Promise.all([
+          fetch(`http://localhost:9999/orders?userId=${user.id}&_sort=id&_order=desc`),
+          fetch("http://localhost:9999/shop")
+        ]);
+
+        const orderData = await orderRes.json();
+        const productData = await productRes.json();
+
+        setOrders(orderData);
+        setProducts(productData); 
 
         const detailsData = {};
-        for (const order of data) {
+        for (const order of orderData) {
           const resDetails = await fetch(`http://localhost:9999/orderDetails?orderId=${order.id}`);
           const orderDetails = await resDetails.json();
           detailsData[order.id] = orderDetails;
@@ -63,6 +71,11 @@ function OrderHistory() {
     }
   };
 
+  const getProductName = (id) => {
+    const p = products.find(p => String(p.id) === String(id));
+    return p ? p.name : `#${id}`;
+  };
+
   return (
     <Container className="mt-5 pt-5">
       <h2 className="mb-4">📦 Lịch sử đơn hàng</h2>
@@ -80,7 +93,7 @@ function OrderHistory() {
               <thead className="table-primary">
                 <tr>
                   <th>#</th>
-                  <th>ID sản phẩm</th>
+                  <th>Sản phẩm</th> 
                   <th>Số lượng</th>
                   <th>Đơn giá</th>
                   <th>Thành tiền</th>
@@ -90,7 +103,7 @@ function OrderHistory() {
                 {detailsMap[order.id]?.map((item, idx) => (
                   <tr key={item.id}>
                     <td>{idx + 1}</td>
-                    <td>{item.productId}</td>
+                    <td>{getProductName(item.productId)}</td>
                     <td>{item.quantity}</td>
                     <td>{item.unitPrice.toLocaleString()} VND</td>
                     <td>{(item.quantity * item.unitPrice).toLocaleString()} VND</td>

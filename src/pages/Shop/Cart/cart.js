@@ -50,58 +50,55 @@ export default function Car() {
     fetchCart();
   };
 
- const handleCheckout = async () => {
-  if (!user || cartItems.length === 0) return;
+  const handleCheckout = async () => {
+    if (!user || cartItems.length === 0) return;
 
-  // Bước 1: Tạo đơn hàng
-  const newOrder = {
-    userId: user.id,
-    orderDate: new Date().toISOString(),
-    statusId: 1,
-    totalAmount: total,
-  };
+    const newOrder = {
+      userId: user.id,
+      orderDate: new Date().toISOString(),
+      statusId: 1,
+      totalAmount: total,
+    };
 
-  const orderRes = await fetch("http://localhost:9999/orders", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newOrder),
-  });
-
-  if (!orderRes.ok) {
-    alert("Không thể tạo đơn hàng. Vui lòng thử lại.");
-    return;
-  }
-
-  const createdOrder = await orderRes.json();
-  const orderId = createdOrder.id;
-
-  // Bước 2: Tạo chi tiết đơn hàng cho mỗi sản phẩm trong giỏ
-  for (const item of cartItems) {
-    const product = products.find(p => p.id === item.productId);
-    if (!product) continue;
-
-    await fetch("http://localhost:9999/orderDetails", {
+    const orderRes = await fetch("http://localhost:9999/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        orderId: orderId,
-        productId: item.productId,
-        quantity: item.quantity,
-        unitPrice: product.price,
-      }),
+      body: JSON.stringify(newOrder),
     });
-  }
 
-  // Bước 3: Xoá toàn bộ sản phẩm khỏi giỏ hàng
-  for (const item of cartItems) {
-    await fetch(`http://localhost:9999/shoppingCart/${item.id}`, {
-      method: "DELETE",
-    });
-  }
+    if (!orderRes.ok) {
+      alert("Không thể tạo đơn hàng. Vui lòng thử lại.");
+      return;
+    }
 
-  alert("Đặt hàng thành công!");
-  navigate("/orderHistory");
-};
+    const createdOrder = await orderRes.json();
+    const orderId = createdOrder.id;
+
+    for (const item of cartItems) {
+      const product = products.find(p => p.id === item.productId);
+      if (!product) continue;
+
+      await fetch("http://localhost:9999/orderDetails", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderId: orderId,
+          productId: item.productId,
+          quantity: item.quantity,
+          unitPrice: product.price,
+        }),
+      });
+    }
+
+    for (const item of cartItems) {
+      await fetch(`http://localhost:9999/shoppingCart/${item.id}`, {
+        method: "DELETE",
+      });
+    }
+
+    alert("Đặt hàng thành công!");
+    navigate("/orderHistory");
+  };
 
   return (
     <Container className="mt-4">
@@ -150,8 +147,13 @@ export default function Car() {
             Tổng cộng: <span className="text-primary">{total.toLocaleString()} VND</span>
           </h4>
 
-          <div className="d-flex justify-content-end">
-            <Button variant="success" onClick={handleCheckout}>Thanh Toán</Button>
+          <div className="d-flex justify-content-end gap-2">
+            <Button variant="outline-primary" onClick={() => navigate("/orderHistory")}>
+              Xem lịch sử đơn hàng
+            </Button>
+            <Button variant="success" onClick={handleCheckout}>
+              Thanh Toán
+            </Button>
           </div>
         </>
       )}

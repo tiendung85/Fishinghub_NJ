@@ -8,7 +8,8 @@
       "role": 1,
       "gender": "male",
       "dateOfBirth": "1985-03-12",
-      "location": "Hanoi, Vietnam"
+      "location": "Hanoi, Vietnam",
+      "id": "a4bf"
     },
     {
       "username": "username2",
@@ -18,7 +19,8 @@
       "role": 1,
       "gender": "male",
       "dateOfBirth": "1985-03-12",
-      "location": "Hanoi, Vietnam"
+      "location": "Hanoi, Vietnam",
+      "id": "bcf5"
     },
     {
       "username": "FishingOwner",
@@ -28,7 +30,8 @@
       "role": 2,
       "gender": "female",
       "dateOfBirth": "1992-07-25",
-      "location": "Ho Chi Minh City, Vietnam"
+      "location": "Ho Chi Minh City, Vietnam",
+      "id": "525c"
     },
     {
       "username": "admin",
@@ -38,26 +41,27 @@
       "role": 3,
       "gender": "male",
       "dateOfBirth": "1980-01-01",
-      "location": "Da Nang, Vietnam"
+      "location": "Da Nang, Vietnam",
+      "id": "2747"
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Cần câu"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Mồi câu"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Phụ kiện"
     }
   ],
   "shop": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Cần câu Shimano FX",
       "description": "Cần câu cá chất lượng cao, nhẹ và bền.",
       "price": 1200000,
@@ -68,7 +72,7 @@
       "ownerId": 2
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Mồi tổng hợp nước ngọt",
       "description": "Thu hút các loại cá như trắm, chép, rô phi.",
       "price": 85000,
@@ -77,41 +81,171 @@
       "SoldQuantity": 12,
       "CategoryId": 2,
       "ownerId": 2
+    },
+    {
+      "id": "3",
+      "name": "Lưỡi câu Inox Sắc Bén",
+      "description": "Chống gỉ sét, thích hợp cho nước ngọt và mặn.",
+      "price": 30000,
+      "image": "https://example.com/luoicau.jpg",
+      "StockQuantity": 100,
+      "SoldQuantity": 20,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": "4",
+      "name": "Phao câu cá nhạy sóng",
+      "description": "Dễ phát hiện khi cá cắn mồi.",
+      "price": 25000,
+      "image": "https://example.com/phao.jpg",
+      "StockQuantity": 200,
+      "SoldQuantity": 60,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": "5",
+      "name": "Mồi giả hương tôm",
+      "description": "Thu hút cá lóc, cá rô bằng mùi hương đặc trưng.",
+      "price": 45000,
+      "image": "https://example.com/moigia.jpg",
+      "StockQuantity": 120,
+      "SoldQuantity": 40,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": "6",
+      "name": "Cần câu rút gọn Travel Pro",
+      "description": "Thiết kế nhỏ gọn, dễ mang theo khi đi du lịch.",
+      "price": 950000,
+      "image": "https://example.com/cancaurut.jpg",
+      "StockQuantity": 15,
+      "SoldQuantity": 5,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": "7",
+      "name": "Dây câu siêu bền 100m",
+      "description": "Chống xoắn, chịu lực cao.",
+      "price": 120000,
+      "image": "https://example.com/daycau.jpg",
+      "StockQuantity": 60,
+      "SoldQuantity": 25,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": "8",
+      "name": "Combo mồi câu tổng hợp 5 vị",
+      "description": "Đa dạng lựa chọn cho từng loại cá.",
+      "price": 150000,
+      "image": "https://example.com/combomoi.jpg",
+      "StockQuantity": 40,
+      "SoldQuantity": 18,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": "9",
+      "name": "Hộp đựng dụng cụ câu cá",
+      "description": "Đựng mồi, phao, dây... tiện lợi và gọn gàng.",
+      "price": 85000,
+      "image": "https://example.com/hopdung.jpg",
+      "StockQuantity": 30,
+      "SoldQuantity": 12,
+      "CategoryId": 3,
+      "ownerId": 2
+    },
+    {
+      "id": "10",
+      "name": "Mồi nhái giả mềm",
+      "description": "Thích hợp câu cá lóc, tạo chuyển động linh hoạt.",
+      "price": 68000,
+      "image": "https://example.com/moinhaigia.jpg",
+      "StockQuantity": 55,
+      "SoldQuantity": 30,
+      "CategoryId": 2,
+      "ownerId": 2
+    },
+    {
+      "id": "11",
+      "name": "Cần câu Daiwa Samurai",
+      "description": "Cấu tạo carbon, độ đàn hồi cao.",
+      "price": 1350000,
+      "image": "https://example.com/daiwa.jpg",
+      "StockQuantity": 8,
+      "SoldQuantity": 3,
+      "CategoryId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": "12",
+      "name": "Kẹp cá inox chống gỉ",
+      "description": "An toàn khi tháo cá khỏi lưỡi câu.",
+      "price": 90000,
+      "image": "https://example.com/kepca.jpg",
+      "StockQuantity": 45,
+      "SoldQuantity": 19,
+      "CategoryId": 3,
+      "ownerId": 2
     }
   ],
   "shoppingCart": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "productId": 2,
       "quantity": 3
+    },
+    {
+      "id": "de2d",
+      "productId": "2",
+      "quantity": 1
+    },
+    {
+      "id": "52a4",
+      "productId": "1",
+      "quantity": 1
+    },
+    {
+      "id": "54b0",
+      "productId": "8",
+      "quantity": 1
+    },
+    {
+      "id": "f4ff",
+      "productId": "12",
+      "quantity": 1
     }
   ],
   "orderStatus": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Đang xử lý"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Đang giao hàng"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Hoàn thành"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Đã thanh toán"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Đã hủy"
     }
   ],
   "orders": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "orderDate": "2025-07-05T10:00:00Z",
       "statusId": 1,
@@ -155,13 +289,13 @@
     {
       "id": "1827",
       "orderDate": "2025-07-12T21:49:23.582Z",
-      "statusId": 1,
+      "statusId": 5,
       "totalAmount": 1370000
     },
     {
       "id": "01e8",
       "orderDate": "2025-07-12T21:49:40.811Z",
-      "statusId": 1,
+      "statusId": 5,
       "totalAmount": 595000
     },
     {
@@ -169,11 +303,35 @@
       "orderDate": "2025-07-12T21:50:56.129Z",
       "statusId": 1,
       "totalAmount": 255000
+    },
+    {
+      "id": "f817",
+      "orderDate": "2025-07-15T18:59:10.543Z",
+      "statusId": 1,
+      "totalAmount": 8910000
+    },
+    {
+      "id": "0451",
+      "orderDate": "2025-07-15T19:04:34.641Z",
+      "statusId": 5,
+      "totalAmount": 1285000
+    },
+    {
+      "id": "9866",
+      "orderDate": "2025-07-15T19:04:58.577Z",
+      "statusId": 1,
+      "totalAmount": 850000
+    },
+    {
+      "id": "678f",
+      "orderDate": "2025-07-15T19:05:33.427Z",
+      "statusId": 1,
+      "totalAmount": 255000
     }
   ],
   "orderDetails": [
     {
-      "id": 1,
+      "id": "1",
       "orderId": 1,
       "productId": 2,
       "quantity": 3,
@@ -241,11 +399,53 @@
       "productId": 2,
       "quantity": 3,
       "unitPrice": 85000
+    },
+    {
+      "id": "d14d",
+      "orderId": "f817",
+      "productId": "1",
+      "quantity": 7,
+      "unitPrice": 1200000
+    },
+    {
+      "id": "8fc6",
+      "orderId": "f817",
+      "productId": "2",
+      "quantity": 6,
+      "unitPrice": 85000
+    },
+    {
+      "id": "4807",
+      "orderId": "0451",
+      "productId": "1",
+      "quantity": 1,
+      "unitPrice": 1200000
+    },
+    {
+      "id": "96ef",
+      "orderId": "0451",
+      "productId": "2",
+      "quantity": 1,
+      "unitPrice": 85000
+    },
+    {
+      "id": "ac5c",
+      "orderId": "9866",
+      "productId": "2",
+      "quantity": 10,
+      "unitPrice": 85000
+    },
+    {
+      "id": "cf55",
+      "orderId": "678f",
+      "productId": "2",
+      "quantity": 3,
+      "unitPrice": 85000
     }
   ],
   "knowledgeFish": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Cá Trắm Đen",
       "description": "Loài cá phổ biến ở sông hồ Việt Nam. Ăn thực vật.",
       "image": "https://example.com/tramden.jpg",
@@ -255,7 +455,7 @@
       "averageWeight": "3-5 kg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Cá Chép",
       "description": "Thích nghi tốt, dễ câu và thường xuất hiện vào sáng sớm.",
       "image": "https://example.com/cachep.jpg",

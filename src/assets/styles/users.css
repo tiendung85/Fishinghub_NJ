@@ -1,0 +1,41 @@
+.form-label-spacing {
+  margin-bottom: 8px;
+  display: block;
+}
+
+.user-table th {
+  background-color: #3989CE;
+  color: white;
+  font-weight: 600;
+}
+
+.user-table td {
+  vertical-align: middle;
+}
+
+.user-table .username {
+  color: #3989CE;
+  font-weight: 500;
+}
+
+.btn-link {
+  padding: 0;
+  line-height: 1;
+}
+
+.btn-link svg {
+  color: #3989CE;
+}
+
+.btn-link:hover svg {
+  color: #2a6ca0;
+}
+
+.input-group-text {
+  background-color: #3989CE;
+  color: white;
+}
+
+.form-select, .form-control {
+  border-radius: 5px;
+}
